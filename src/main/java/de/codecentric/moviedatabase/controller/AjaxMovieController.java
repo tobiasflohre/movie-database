@@ -4,6 +4,8 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import de.codecentric.moviedatabase.service.MovieService;
 @RequestMapping(value = "/movies", headers="X-Requested-With=XMLHttpRequest")
 public class AjaxMovieController extends AbstractMovieController{
 	
+	private final static Logger logger = LoggerFactory.getLogger(AjaxMovieController.class); 
+
 	public AjaxMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,
@@ -27,6 +31,7 @@ public class AjaxMovieController extends AbstractMovieController{
 
 	@Override
 	protected String getLogicalViewNamePrefix() {
+		logger.debug("ajax get");
 		return "ajax/";
 	}
 

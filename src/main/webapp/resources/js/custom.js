@@ -1,5 +1,5 @@
 $(function() {
-	$("a").click(function(e) {
+	$("body").on("click","a",function(e) {
 		// users want to open the page in a new tab - let them do it!
 		if (e.ctrlKey || e.metaKey) {
 			return;
@@ -16,7 +16,7 @@ $(function() {
 		});
 	}, 0);
   
-	$('form[method="post"]').submit(function(e){
+	$("body").on("submit", 'form[method="post"]', function(e){
 		e.preventDefault();
 		var $form = $(this);
 		var url = $form.attr("action");
@@ -32,7 +32,7 @@ $(function() {
 	    });
 	});
 
-	$('form[method="get"]').submit(function(e){
+	$("body").on("submit", 'form[method="get"]', function(e){
 		e.preventDefault();
 		var $form = $(this);
 		var queryParams = $form.serialize();
@@ -42,24 +42,3 @@ $(function() {
 	});
 
 });
-
-function doPostSubmit(e){
-	alert('hier');
-	e.preventDefault();
-	var $form = $(this);
-	var url = $form.attr("action");
-	alert(url);
-	$.post(url, $form.serialize(), function(html, textStatus, jqXHR) {
-		console.log(jqXHR);
-    	$("#pageContent").html(html);
-    	// if the current url does not reflect the content, the correct url may be specified by a header attribute
-    	var redirectUrl = jqXHR.getResponseHeader('redirectUrl');
-    	alert(redirectUrl);
-    	if (redirectUrl){
-			history.pushState(null, null, redirectUrl);
-    	} else {
-			history.pushState(null, null, url);
-    	};
-    });
-};
-
