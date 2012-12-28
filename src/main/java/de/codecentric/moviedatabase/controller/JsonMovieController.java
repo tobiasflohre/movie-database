@@ -6,6 +6,9 @@ import java.util.Set;
 import java.util.UUID;
 
 import org.springframework.hateoas.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -35,12 +38,17 @@ public class JsonMovieController {
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody List<Resource<Movie>> getMovies(@RequestParam(required = false) String searchString) {
+	public @ResponseBody ResponseEntity<List<Resource<Movie>>> getMovies(@RequestParam(required = false) String searchString) {
 		Set<Tag> tags = new HashSet<Tag>();
 		Set<String> searchWords = new HashSet<String>();
 		Util.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
-		return  movieResourceAssembler.toResource(movies);
+		return  enableCorsRequests(movieResourceAssembler.toResource(movies), HttpStatus.OK);
 	}
 	
+	private <T> ResponseEntity<T> enableCorsRequests(T entity, HttpStatus statusCode) {
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Access-Control-Allow-Origin", "*");
+		return new ResponseEntity<T>(entity, headers, statusCode);
+	}
 }
