@@ -1,4 +1,5 @@
 *.class
+src/main/webapp/META-INF/MANIFEST.MF
 
 # Package Files #
 *.jar

@@ -16,12 +16,15 @@ public class Movie {
 	private Set<Tag> tags = new HashSet<Tag>();
 	private List<Comment> comments = new ArrayList<Comment>();
 
-	public Movie(String title, String description, Date startDate) {
-		super();
-		this.id = UUID.randomUUID();
+	public Movie(UUID id, String title, String description, Date startDate) {
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.startDate = startDate;
+	}
+
+	public Movie(String title, String description, Date startDate) {
+		this(UUID.randomUUID(), title, description, startDate);
 	}
 
 	public UUID getId() {

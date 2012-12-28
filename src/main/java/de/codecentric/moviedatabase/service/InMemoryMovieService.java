@@ -24,7 +24,10 @@ public class InMemoryMovieService implements MovieService {
 	private Map<Tag, Set<Movie>> tagToMoviesMap = new ConcurrentHashMap<Tag, Set<Movie>>();
 	
 	public InMemoryMovieService(){
-		Movie movie = new Movie("Star Wars","In einer Galaxie weit, weit entfernt", new Date());
+		// let the dummy Movie have always the same ID to test it easily via command line tools / unit tests
+		Movie movie = new Movie(UUID.fromString("240342ea-84c8-415f-b1d5-8e4376191aeb"),
+				"Star Wars","In einer Galaxie weit, weit entfernt",
+				new Date());
 		Tag tag = new Tag("Science Fiction");
 		movie.getTags().add(tag);
 		idToMovieMap.put(movie.getId(), movie);
