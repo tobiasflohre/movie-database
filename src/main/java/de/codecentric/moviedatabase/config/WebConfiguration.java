@@ -10,6 +10,8 @@ import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
 import de.codecentric.moviedatabase.controller.AjaxMovieController;
+import de.codecentric.moviedatabase.controller.JSONMovieController;
+import de.codecentric.moviedatabase.controller.JSONTagController;
 import de.codecentric.moviedatabase.controller.MovieController;
 import de.codecentric.moviedatabase.controller.MovieResourceAssembler;
 import de.codecentric.moviedatabase.controller.TagResourceAssembler;
@@ -79,6 +81,16 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	@Bean
 	public AjaxMovieController ajaxMovieController(){
 		return new AjaxMovieController(movieService(), controllerLinkBuilderFactory(), tagResourceAssembler(), movieResourceAssembler());
+	}
+	
+	@Bean
+	public JSONMovieController jsonMovieController() {
+		return new JSONMovieController(movieService(), movieResourceAssembler(), tagResourceAssembler());
+	}
+	
+	@Bean
+	public JSONTagController jsonTagController() {
+		return new JSONTagController(movieService(), tagResourceAssembler());
 	}
 
 }

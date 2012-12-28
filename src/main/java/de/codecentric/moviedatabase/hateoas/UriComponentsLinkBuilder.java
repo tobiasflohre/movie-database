@@ -16,6 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @author Ricardo Gladwell
  * @author Oliver Gierke
  * @author Tobias Flohre (extended for request parameters)
+ * @param <T> The LinkBuilder Typ
  */
 public abstract class UriComponentsLinkBuilder<T extends LinkBuilder> implements LinkBuilder {
 
@@ -36,6 +37,7 @@ public abstract class UriComponentsLinkBuilder<T extends LinkBuilder> implements
 	 * (non-Javadoc)
 	 * @see org.springframework.hateoas.LinkBuilder#slash(java.lang.Object)
 	 */
+	@Override
 	public T slash(Object object) {
 
 		if (object == null) {
@@ -59,6 +61,7 @@ public abstract class UriComponentsLinkBuilder<T extends LinkBuilder> implements
 	 * (non-Javadoc)
 	 * @see org.springframework.hateoas.LinkBuilder#slash(org.springframework.hateoas.Identifiable)
 	 */
+	@Override
 	public LinkBuilder slash(Identifiable<?> identifyable) {
 
 		if (identifyable == null) {
@@ -72,6 +75,7 @@ public abstract class UriComponentsLinkBuilder<T extends LinkBuilder> implements
 	 * (non-Javadoc)
 	 * @see org.springframework.hateoas.LinkBuilder#toUri()
 	 */
+	@Override
 	public URI toUri() {
 		return uriComponents.encode().toUri();
 	}
@@ -80,6 +84,7 @@ public abstract class UriComponentsLinkBuilder<T extends LinkBuilder> implements
 	 * (non-Javadoc)
 	 * @see org.springframework.hateoas.LinkBuilder#withRel(java.lang.String)
 	 */
+	@Override
 	public Link withRel(String rel) {
 		return new Link(this.toString(), rel);
 	}
@@ -88,6 +93,7 @@ public abstract class UriComponentsLinkBuilder<T extends LinkBuilder> implements
 	 * (non-Javadoc)
 	 * @see org.springframework.hateoas.LinkBuilder#withSelfRel()
 	 */
+	@Override
 	public Link withSelfRel() {
 		return new Link(this.toString());
 	}
