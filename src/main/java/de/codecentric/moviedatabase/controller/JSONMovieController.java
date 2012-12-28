@@ -17,12 +17,14 @@ import de.codecentric.moviedatabase.domain.Tag;
 import de.codecentric.moviedatabase.service.MovieService;
 
 @RequestMapping(value = "/movies", headers="Accept=application/json")
-public class MediaTypeMovieController {
+public class JSONMovieController {
 
 	private MovieService movieService;
 	private MovieResourceAssembler movieResourceAssembler;
 
-	public MediaTypeMovieController(MovieService movieService, MovieResourceAssembler movieResourceAssembler) {
+	public JSONMovieController(MovieService movieService,
+			MovieResourceAssembler movieResourceAssembler,
+			TagResourceAssembler tagResourceAssembler) {
 		this.movieService = movieService;
 		this.movieResourceAssembler = movieResourceAssembler;
 	}
@@ -40,4 +42,5 @@ public class MediaTypeMovieController {
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		return  movieResourceAssembler.toResource(movies);
 	}
+	
 }
