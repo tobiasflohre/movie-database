@@ -64,9 +64,9 @@ public class MovieController extends AbstractMovieController{
 		doCreateMovie(movieForm);
 		if (movieForm.isAddAnotherMovie()){
 			return "redirect:/movies/new";
-		} else {
-			return "redirect:/movies";
 		}
+		
+		return "redirect:/movies";
 	}
 	
 	//####################### movie ############################################

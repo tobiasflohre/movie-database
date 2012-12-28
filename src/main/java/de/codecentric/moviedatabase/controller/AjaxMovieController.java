@@ -43,9 +43,9 @@ public class AjaxMovieController extends AbstractMovieController{
 		if (movieForm.isAddAnotherMovie()){
 			response.setHeader("redirectUrl", linkBuilderFactory.linkTo(MovieController.class).slash(PathFragment.NEW.getName()).withSelfRel().getHref());
 			return getCreateMovie(model);
-		} else {
-			return getMovies(model, null);
 		}
+		
+		return getMovies(model, null);
 	}
 
 	//########################### movie #####################################################

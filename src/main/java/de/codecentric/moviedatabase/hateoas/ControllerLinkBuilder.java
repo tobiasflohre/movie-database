@@ -22,7 +22,7 @@ public class ControllerLinkBuilder extends UriComponentsLinkBuilder<ControllerLi
 	 * Creates a new {@link ControllerLinkBuilder} with a base of the mapping annotated to the given controller class.
 	 * 
 	 * @param controller the class to discover the annotation on, must not be {@literal null}.
-	 * @return
+	 * @return the created link builder
 	 */
 	public static ControllerLinkBuilder linkTo(Class<?> controller) {
 		return linkTo(controller, new Object[0]);
@@ -35,7 +35,7 @@ public class ControllerLinkBuilder extends UriComponentsLinkBuilder<ControllerLi
 	 * @param controller the class to discover the annotation on, must not be {@literal null}.
 	 * @param parameters additional parameters to bind to the URI template declared in the annotation, must not be
 	 *          {@literal null}.
-	 * @return
+	 * @return the created link builder
 	 */
 	public static ControllerLinkBuilder linkTo(Class<?> controller, Object... parameters) {
 
