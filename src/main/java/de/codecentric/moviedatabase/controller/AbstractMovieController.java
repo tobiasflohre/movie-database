@@ -56,7 +56,7 @@ public abstract class AbstractMovieController {
 	public String getMovies(Model model, @RequestParam(required = false) String searchString) {
 		Set<Tag> tags = new HashSet<Tag>();
 		Set<String> searchWords = new HashSet<String>();
-		convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
+		Util.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		List<Resource<Movie>> resourceMovies = movieResourceAssembler.toResource(movies);
 		model.addAttribute("movies", resourceMovies);
@@ -139,39 +139,5 @@ public abstract class AbstractMovieController {
 		return new ResponseEntity<String>(e.getMessage(),HttpStatus.NOT_FOUND);
 	}
 	
-	//################ helper methods ####################################
-
-	private void convertSearchStringToTagsAndSearchWords(String searchString,
-			Set<Tag> tags, Set<String> searchWords) {
-		// What I do here could probably be done a thousand times more elegant, but it's not the focus of this project...
-		if (searchString != null){
-			String[] splitAroundTags = searchString.split("tag:");
-			for (String token: splitAroundTags){
-				if (token.length()!=0){
-					if (token.startsWith("'")){
-						// It's a tag!
-						String[] splitAroundQuotes = token.split("'");
-						// first one is empty, the second one is the tag
-						tags.add(new Tag(splitAroundQuotes[1]));
-						// if there is a rest they must be searchwords
-						if (splitAroundQuotes.length > 2){
-							for (int i = 2; i<splitAroundQuotes.length;i++){
-								// split searchwords by blanks
-								for (String searchWord: splitAroundQuotes[i].split(" ")){
-									searchWords.add(searchWord.toLowerCase());
-								}
-							}
-						}
-					} else {
-						// there's no tag
-						// split searchwords by blanks
-						for (String searchWord: token.split(" ")){
-							searchWords.add(searchWord.toLowerCase());
-						}
-					}
-				}
-			}
-		}
-	}
 	
 }
