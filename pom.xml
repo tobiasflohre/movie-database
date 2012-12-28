@@ -133,6 +133,13 @@
 			<version>1.2</version>
 		</dependency>
 
+		<!-- JSON Object Mapping -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+			<version>1.9.11</version>
+		</dependency>
+
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>

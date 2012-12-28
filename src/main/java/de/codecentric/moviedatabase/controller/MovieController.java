@@ -19,7 +19,7 @@ import de.codecentric.moviedatabase.hateoas.ControllerLinkBuilderFactory;
 import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
-@RequestMapping(value = "/movies", headers="X-Requested-With!=XMLHttpRequest")
+@RequestMapping(value = "/movies", headers={"X-Requested-With!=XMLHttpRequest", "Accept=text/html"})
 public class MovieController extends AbstractMovieController{
 	
 	private final static Logger logger = LoggerFactory.getLogger(MovieController.class); 
