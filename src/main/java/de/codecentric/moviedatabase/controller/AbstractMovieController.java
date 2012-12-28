@@ -66,8 +66,8 @@ public abstract class AbstractMovieController {
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public String getCreateMovie(Model model) {
 		model.addAttribute("movieForm", new MovieForm());
-		model.addAttribute("actionLink", linkBuilderFactory.linkTo(MovieController.class).withSelfRel());
-		model.addAttribute("cancelLink", linkBuilderFactory.linkTo(MovieController.class).withSelfRel());
+		model.addAttribute("actionLink", linkBuilderFactory.linkTo(HtmlMovieController.class).withSelfRel());
+		model.addAttribute("cancelLink", linkBuilderFactory.linkTo(HtmlMovieController.class).withSelfRel());
 		return getLogicalViewNamePrefix()+"movie_edit";
 	}
 	

@@ -9,10 +9,10 @@ import org.thymeleaf.spring3.SpringTemplateEngine;
 import org.thymeleaf.spring3.view.ThymeleafViewResolver;
 import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
 
-import de.codecentric.moviedatabase.controller.AjaxMovieController;
-import de.codecentric.moviedatabase.controller.JSONMovieController;
-import de.codecentric.moviedatabase.controller.JSONTagController;
-import de.codecentric.moviedatabase.controller.MovieController;
+import de.codecentric.moviedatabase.controller.HtmlAjaxMovieController;
+import de.codecentric.moviedatabase.controller.JsonMovieController;
+import de.codecentric.moviedatabase.controller.JsonTagController;
+import de.codecentric.moviedatabase.controller.HtmlMovieController;
 import de.codecentric.moviedatabase.controller.MovieResourceAssembler;
 import de.codecentric.moviedatabase.controller.TagResourceAssembler;
 import de.codecentric.moviedatabase.hateoas.ControllerLinkBuilderFactory;
@@ -74,23 +74,23 @@ public class WebConfiguration extends WebMvcConfigurerAdapter {
 	}
 	
 	@Bean
-	public MovieController movieController(){
-		return new MovieController(movieService(), controllerLinkBuilderFactory(), tagResourceAssembler(), movieResourceAssembler());
+	public HtmlMovieController movieController(){
+		return new HtmlMovieController(movieService(), controllerLinkBuilderFactory(), tagResourceAssembler(), movieResourceAssembler());
 	}
 
 	@Bean
-	public AjaxMovieController ajaxMovieController(){
-		return new AjaxMovieController(movieService(), controllerLinkBuilderFactory(), tagResourceAssembler(), movieResourceAssembler());
+	public HtmlAjaxMovieController ajaxMovieController(){
+		return new HtmlAjaxMovieController(movieService(), controllerLinkBuilderFactory(), tagResourceAssembler(), movieResourceAssembler());
 	}
 	
 	@Bean
-	public JSONMovieController jsonMovieController() {
-		return new JSONMovieController(movieService(), movieResourceAssembler(), tagResourceAssembler());
+	public JsonMovieController jsonMovieController() {
+		return new JsonMovieController(movieService(), movieResourceAssembler(), tagResourceAssembler());
 	}
 	
 	@Bean
-	public JSONTagController jsonTagController() {
-		return new JSONTagController(movieService(), tagResourceAssembler());
+	public JsonTagController jsonTagController() {
+		return new JsonTagController(movieService(), tagResourceAssembler());
 	}
 
 }

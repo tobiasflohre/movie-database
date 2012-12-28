@@ -11,12 +11,12 @@ import de.codecentric.moviedatabase.domain.Tag;
 import de.codecentric.moviedatabase.service.MovieService;
 
 @RequestMapping(value = "/tags", headers="Accept=application/json")
-public class JSONTagController {
+public class JsonTagController {
 	
 	private MovieService movieService;
 	private TagResourceAssembler tagResourceAssembler;
 	
-	public JSONTagController(MovieService movieService,
+	public JsonTagController(MovieService movieService,
 			TagResourceAssembler tagResourceAssembler) {
 		this.movieService = movieService;
 		this.tagResourceAssembler = tagResourceAssembler;

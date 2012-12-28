@@ -18,11 +18,11 @@ import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
 @RequestMapping(value = "/movies", headers={"X-Requested-With=XMLHttpRequest", "Accept=text/html"})
-public class AjaxMovieController extends AbstractMovieController{
+public class HtmlAjaxMovieController extends AbstractMovieController{
 	
-	private final static Logger logger = LoggerFactory.getLogger(AjaxMovieController.class); 
+	private final static Logger logger = LoggerFactory.getLogger(HtmlAjaxMovieController.class); 
 
-	public AjaxMovieController(MovieService movieService,
+	public HtmlAjaxMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,
 			MovieResourceAssembler movieResourceAssembler) {
@@ -41,7 +41,7 @@ public class AjaxMovieController extends AbstractMovieController{
 	public String createMovie(MovieForm movieForm, Model model, HttpServletResponse response) {
 		doCreateMovie(movieForm);
 		if (movieForm.isAddAnotherMovie()){
-			response.setHeader("redirectUrl", linkBuilderFactory.linkTo(MovieController.class).slash(PathFragment.NEW.getName()).withSelfRel().getHref());
+			response.setHeader("redirectUrl", linkBuilderFactory.linkTo(HtmlMovieController.class).slash(PathFragment.NEW.getName()).withSelfRel().getHref());
 			return getCreateMovie(model);
 		}
 		

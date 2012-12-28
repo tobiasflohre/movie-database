@@ -20,11 +20,11 @@ import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
 @RequestMapping(value = "/movies", headers={"X-Requested-With!=XMLHttpRequest", "Accept=text/html"})
-public class MovieController extends AbstractMovieController{
+public class HtmlMovieController extends AbstractMovieController{
 	
-	private final static Logger logger = LoggerFactory.getLogger(MovieController.class); 
+	private final static Logger logger = LoggerFactory.getLogger(HtmlMovieController.class); 
 	
-	public MovieController(MovieService movieService,
+	public HtmlMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,
 			MovieResourceAssembler movieResourceAssembler) {
@@ -47,12 +47,12 @@ public class MovieController extends AbstractMovieController{
 	
 	@ModelAttribute("linkHome")
 	public Link getLinkHome(){
-		return linkBuilderFactory.linkTo(MovieController.class).withSelfRel();
+		return linkBuilderFactory.linkTo(HtmlMovieController.class).withSelfRel();
 	}
 	
 	@ModelAttribute("linkNewMovie")
 	public Link getLinkNewMovie(){
-		return linkBuilderFactory.linkTo(MovieController.class)
+		return linkBuilderFactory.linkTo(HtmlMovieController.class)
 				.slash(PathFragment.NEW.getName())
 				.withRel(Relation.NEW.getName());
 	}
