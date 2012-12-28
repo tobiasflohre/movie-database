@@ -1,6 +1,5 @@
 package de.codecentric.moviedatabase.config;
 
-import javax.servlet.FilterRegistration;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
@@ -23,8 +22,11 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 				servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
 		dispatcher.setLoadOnStartup(1); 
 		dispatcher.addMapping("/");	
-		FilterRegistration.Dynamic hiddenHttpMethodFilter = 
-				servletContext.addFilter("hiddenHttpMethodFilter", HiddenHttpMethodFilter.class);
-		hiddenHttpMethodFilter.addMappingForUrlPatterns(null, false, "/*");	}
-
+		
+		servletContext.addFilter("corsFilter", CorsFilter.class)
+			.addMappingForUrlPatterns(null, false, "/*");
+		
+		servletContext.addFilter("hiddenHttpMethodFilter", HiddenHttpMethodFilter.class)
+			.addMappingForUrlPatterns(null, false, "/*");
+	}
 }
