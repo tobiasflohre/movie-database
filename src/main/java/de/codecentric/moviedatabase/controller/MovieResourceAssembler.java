@@ -21,23 +21,23 @@ public class MovieResourceAssembler extends AbstractResourceAssembler<Movie, Res
 	@Override
 	public Resource<Movie> toResource(Movie movie) {
 		Assert.notNull(movie);
-		Link selfLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		Link selfLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(movie.getId())
 				.withRel(Relation.SELF.getName());
-		Link moviesLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		Link moviesLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.withRel(Relation.MOVIES.getName());
-		Link deleteLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		Link deleteLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(movie.getId())
 				.withRel(Relation.DELETE.getName());
-		Link editLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		Link editLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(movie.getId())
 				.slash(PathFragment.EDIT.getName())
 				.withRel(Relation.EDIT.getName());
-		Link commentsLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		Link commentsLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(movie.getId())
 				.slash(PathFragment.COMMENTS.getName())
 				.withRel(Relation.COMMENTS.getName());
-		Link tagsLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		Link tagsLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(movie.getId())
 				.slash(PathFragment.TAGS.getName())
 				.withRel(Relation.TAGS.getName());

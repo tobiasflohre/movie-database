@@ -21,7 +21,7 @@
 						<h2 class="span4 offset2" th:text="${movieForm.pageTitle}">Edit a movie</h2>
 					</div>
 					<div class="row">
-						<form class="form-horizontal" action="#" th:action="@{${actionLink.href}}" th:object="${movieForm}" method="post">
+						<form class="form-horizontal render-partial" action="#" th:action="@{${actionLink.href}}" th:object="${movieForm}" method="post">
 						  <input type="hidden" id="_method" name="_method" th:value="${movieForm.requestMethod}"/>
 						  <div class="control-group" style="padding-top:20px">
 							<label class="control-label" for="title">Title</label>
@@ -51,7 +51,7 @@
 							  	<input type="checkbox" th:field="*{addAnotherMovie}"/>Add another movie
 							  </label>
 							  <button type="submit" class="btn btn-primary">Save</button>
-							  <a href="./movie.html" th:href="${cancelLink.href}" class="btn">Cancel</a>
+							  <a href="./movie.html" th:href="${cancelLink.href}" class="btn render-partial">Cancel</a>
 							</div>
 						  </div>
 						</form>

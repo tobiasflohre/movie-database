@@ -24,6 +24,7 @@ import de.codecentric.moviedatabase.hateoas.ControllerLinkBuilderFactory;
 import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
+@RequestMapping("/movies")
 public abstract class AbstractMovieController {
 	
 	protected MovieService movieService;

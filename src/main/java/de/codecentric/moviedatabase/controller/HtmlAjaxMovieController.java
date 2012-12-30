@@ -41,7 +41,7 @@ public class HtmlAjaxMovieController extends AbstractMovieController{
 	public String createMovie(MovieForm movieForm, Model model, HttpServletResponse response) {
 		doCreateMovie(movieForm);
 		if (movieForm.isAddAnotherMovie()){
-			response.setHeader("redirectUrl", linkBuilderFactory.linkTo(HtmlMovieController.class).slash(PathFragment.NEW.getName()).withSelfRel().getHref());
+			response.setHeader("redirectUrl", linkBuilderFactory.linkTo(AbstractMovieController.class).slash(PathFragment.NEW.getName()).withSelfRel().getHref());
 			return getCreateMovie(model);
 		}
 		

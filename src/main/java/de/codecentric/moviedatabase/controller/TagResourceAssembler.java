@@ -26,7 +26,7 @@ public class TagResourceAssembler extends AbstractResourceAssembler<Tag, Resourc
 	public Resource<Tag> toResource(Tag tag) {
 		Assert.notNull(tag);
 		Link searchLink = null;
-		searchLink = linkBuilderFactory.linkTo(HtmlMovieController.class)
+		searchLink = linkBuilderFactory.linkTo(AbstractMovieController.class)
 			.addRequestParam(RequestParameter.SEARCH_STRING.getName(), "tag:'"+tag.getLabel()+"'").withRel(Relation.SEARCH.getName());
 		return new Resource<Tag>(tag, searchLink);
 	}
@@ -34,7 +34,7 @@ public class TagResourceAssembler extends AbstractResourceAssembler<Tag, Resourc
 	public Resource<Tag> toResource(Tag tag, UUID movieId){
 		Assert.notNull(movieId);
 		Resource<Tag> resourceTag = toResource(tag);
-		Link deleteTagFromMovieLink = linkBuilderFactory.linkTo(HtmlMovieController.class).slash(movieId).slash(PathFragment.TAGS.getName()).slash(tag.getLabel()).withSelfRel();
+		Link deleteTagFromMovieLink = linkBuilderFactory.linkTo(AbstractMovieController.class).slash(movieId).slash(PathFragment.TAGS.getName()).slash(tag.getLabel()).withSelfRel();
 		resourceTag.add(deleteTagFromMovieLink);
 		return resourceTag;
 	}

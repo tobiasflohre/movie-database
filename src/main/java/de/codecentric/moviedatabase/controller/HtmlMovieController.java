@@ -47,12 +47,12 @@ public class HtmlMovieController extends AbstractMovieController{
 	
 	@ModelAttribute("linkHome")
 	public Link getLinkHome(){
-		return linkBuilderFactory.linkTo(HtmlMovieController.class).withSelfRel();
+		return linkBuilderFactory.linkTo(AbstractMovieController.class).withSelfRel();
 	}
 	
 	@ModelAttribute("linkNewMovie")
 	public Link getLinkNewMovie(){
-		return linkBuilderFactory.linkTo(HtmlMovieController.class)
+		return linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(PathFragment.NEW.getName())
 				.withRel(Relation.NEW.getName());
 	}
