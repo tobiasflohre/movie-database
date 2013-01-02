@@ -16,8 +16,8 @@
 			<div class="navbar navbar-inverse navbar-fixed-top">
 			  <div class="navbar-inner">
 				<div class="container-fluid">
-					<div class="row" style="padding-top: 20px; padding-left: 20px">
-						<a class="brand render-partial" href="../movies.html" th:href="${linkHome.href}">Movie Database</a>
+					<div id="searchbar" class="row" style="padding-top: 20px; padding-left: 20px">
+						<a id="home" class="brand render-partial" href="../movies.html" th:href="${linkHome.href}">Movie Database</a>
 						<form class="form-search pull-left render-partial" action="#" th:action="@{${linkHome.href}}" method="get">
 							<div class="input-append">
 								<input type="text" id="searchString" name="searchString" class="search-query input-xxlarge" th:value="${param.searchString != null ? param.searchString[0]:''}"/>

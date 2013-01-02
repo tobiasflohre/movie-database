@@ -31,16 +31,19 @@ public abstract class AbstractMovieController {
 	protected ControllerLinkBuilderFactory linkBuilderFactory;
 	protected TagResourceAssembler tagResourceAssembler;
 	protected MovieResourceAssembler movieResourceAssembler;
+	private boolean partial;
 	
 	public AbstractMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,
-			MovieResourceAssembler movieResourceAssembler) {
+			MovieResourceAssembler movieResourceAssembler,
+			boolean partial) {
 		super();
 		this.movieService = movieService;
 		this.linkBuilderFactory = linkBuilderFactory;
 		this.tagResourceAssembler = tagResourceAssembler;
 		this.movieResourceAssembler = movieResourceAssembler;
+		this.partial = partial;
 	}
 	
 	/**
@@ -49,7 +52,9 @@ public abstract class AbstractMovieController {
 	 * 
 	 * @return prefix for the logical view name.
 	 */
-	protected abstract String getLogicalViewNamePrefix();
+	protected String getLogicalViewNamePrefix(){
+		return "movie/"+ (partial ? "partial/": "");
+	}
 	
 	//###################### movies #################################################
 	
@@ -57,7 +62,7 @@ public abstract class AbstractMovieController {
 	public String getMovies(Model model, @RequestParam(required = false) String searchString) {
 		Set<Tag> tags = new HashSet<Tag>();
 		Set<String> searchWords = new HashSet<String>();
-		Util.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
+		MovieUtil.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		List<Resource<Movie>> resourceMovies = movieResourceAssembler.toResource(movies);
 		model.addAttribute("movies", resourceMovies);

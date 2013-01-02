@@ -28,13 +28,7 @@ public class HtmlMovieController extends AbstractMovieController{
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,
 			MovieResourceAssembler movieResourceAssembler) {
-		super(movieService, linkBuilderFactory, tagResourceAssembler, movieResourceAssembler);
-	}
-
-	@Override
-	protected String getLogicalViewNamePrefix() {
-		logger.debug("Non-ajax get");
-		return "";
+		super(movieService, linkBuilderFactory, tagResourceAssembler, movieResourceAssembler, false);
 	}
 
 	//################### side- and searchbar data ###########################
@@ -57,6 +51,11 @@ public class HtmlMovieController extends AbstractMovieController{
 				.withRel(Relation.NEW.getName());
 	}
 	
+	@ModelAttribute("linkTagsAll")
+	public Link getLinkTagsAll(){
+		return linkBuilderFactory.linkTo(HtmlPartialTagController.class).withSelfRel();
+	}
+
 	//################## movies #################################################
 	
 	@RequestMapping(method = RequestMethod.POST)

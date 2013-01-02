@@ -38,7 +38,7 @@ public class JsonMovieController {
 	public @ResponseBody List<Resource<Movie>> getMovies(@RequestParam(required = false) String searchString) {
 		Set<Tag> tags = new HashSet<Tag>();
 		Set<String> searchWords = new HashSet<String>();
-		Util.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
+		MovieUtil.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		return  movieResourceAssembler.toResource(movies);
 	}
