@@ -4,9 +4,9 @@ import java.util.Set;
 
 import de.codecentric.moviedatabase.domain.Tag;
 
-public final class Util {
+public final class MovieUtil {
 
-	private Util() {
+	private MovieUtil() {
 		// pass
 	}
 	

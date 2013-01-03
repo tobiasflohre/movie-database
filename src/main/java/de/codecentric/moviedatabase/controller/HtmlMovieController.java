@@ -3,8 +3,6 @@ package de.codecentric.moviedatabase.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.ui.Model;
@@ -22,19 +20,11 @@ import de.codecentric.moviedatabase.service.MovieService;
 @RequestMapping(value = "/movies", headers={"X-Requested-With!=XMLHttpRequest", "Accept=text/html"})
 public class HtmlMovieController extends AbstractMovieController{
 	
-	private final static Logger logger = LoggerFactory.getLogger(HtmlMovieController.class); 
-	
 	public HtmlMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,
 			MovieResourceAssembler movieResourceAssembler) {
-		super(movieService, linkBuilderFactory, tagResourceAssembler, movieResourceAssembler);
-	}
-
-	@Override
-	protected String getLogicalViewNamePrefix() {
-		logger.debug("Non-ajax get");
-		return "";
+		super(movieService, linkBuilderFactory, tagResourceAssembler, movieResourceAssembler, false);
 	}
 
 	//################### side- and searchbar data ###########################
@@ -47,16 +37,21 @@ public class HtmlMovieController extends AbstractMovieController{
 	
 	@ModelAttribute("linkHome")
 	public Link getLinkHome(){
-		return linkBuilderFactory.linkTo(HtmlMovieController.class).withSelfRel();
+		return linkBuilderFactory.linkTo(AbstractMovieController.class).withSelfRel();
 	}
 	
 	@ModelAttribute("linkNewMovie")
 	public Link getLinkNewMovie(){
-		return linkBuilderFactory.linkTo(HtmlMovieController.class)
+		return linkBuilderFactory.linkTo(AbstractMovieController.class)
 				.slash(PathFragment.NEW.getName())
 				.withRel(Relation.NEW.getName());
 	}
 	
+	@ModelAttribute("linkTagsAll")
+	public Link getLinkTagsAll(){
+		return linkBuilderFactory.linkTo(HtmlPartialTagController.class).withSelfRel();
+	}
+
 	//################## movies #################################################
 	
 	@RequestMapping(method = RequestMethod.POST)

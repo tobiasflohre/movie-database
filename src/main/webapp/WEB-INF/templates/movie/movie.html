@@ -12,9 +12,9 @@
   </head>
   <body>
 	<div class="container-fluid">
-		<div th:include="fragments/searchbar :: searchbar"></div>
+		<div th:include="navigation/searchbar :: searchbar"></div>
 		<div class="row">
-			<div th:include="fragments/sidebar :: sidebar"></div>
+			<div th:include="navigation/sidebar :: sidebar"></div>
 			<div  id="pageContent" th:fragment="movie">
 				<div class="span10">
 					<div class="row">
@@ -37,15 +37,15 @@
 						</div>
 					</div>
 					<div class="row">
-						<a class="btn btn-primary offset2" href="./movie_edit.html" th:href="${movie.getLink('edit').href}">Edit</a>
-						<a class="btn" href="./comments.html" th:href="${movie.getLink('comments').href}">Comments</a>
-						<a class="btn" href="./tags.html" th:href="${movie.getLink('tags').href}">Tags</a>
+						<a class="btn btn-primary offset2 render-partial" href="./movie_edit.html" th:href="${movie.getLink('edit').href}">Edit</a>
+						<a class="btn render-partial" href="./comments.html" th:href="${movie.getLink('comments').href}">Comments</a>
+						<a class="btn render-partial" href="./tags.html" th:href="${movie.getLink('tags').href}">Tags</a>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="../../resources/js/jquery-1.8.3.min.js" th:src="@{/resources/js/jquery-1.8.3.min.js}"></script>
     <script src="../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
     <script type="text/javascript" src="../../resources/js/custom.js" th:src="@{/resources/js/custom.js}"></script>
   </body>
