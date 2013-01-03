@@ -10,3 +10,4 @@ src/main/webapp/META-INF/MANIFEST.MF
 /.project
 /.classpath
 /.settings
+/.externalToolBuilders

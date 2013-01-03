@@ -4,8 +4,6 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,8 +18,6 @@ import de.codecentric.moviedatabase.service.MovieService;
 @RequestMapping(value = "/movies", headers={"X-Requested-With=XMLHttpRequest", "Accept=text/html"})
 public class HtmlPartialMovieController extends AbstractMovieController{
 	
-	private final static Logger logger = LoggerFactory.getLogger(HtmlPartialMovieController.class); 
-
 	public HtmlPartialMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,
 			TagResourceAssembler tagResourceAssembler,

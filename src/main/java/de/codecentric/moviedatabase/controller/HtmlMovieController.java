@@ -3,8 +3,6 @@ package de.codecentric.moviedatabase.controller;
 import java.util.List;
 import java.util.UUID;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.hateoas.Link;
 import org.springframework.hateoas.Resource;
 import org.springframework.ui.Model;
@@ -21,8 +19,6 @@ import de.codecentric.moviedatabase.service.MovieService;
 
 @RequestMapping(value = "/movies", headers={"X-Requested-With!=XMLHttpRequest", "Accept=text/html"})
 public class HtmlMovieController extends AbstractMovieController{
-	
-	private final static Logger logger = LoggerFactory.getLogger(HtmlMovieController.class); 
 	
 	public HtmlMovieController(MovieService movieService,
 			ControllerLinkBuilderFactory linkBuilderFactory,

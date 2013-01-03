@@ -22,6 +22,7 @@ $(function() {
 	$("body").on("submit", 'form[method="post"].render-partial', function(e){
 		e.preventDefault();
 		var form = $(this);
+		var formId = form.attr('id');
 		var url = form.attr("action");
 		$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
 	    	$("#pageContent").html(html);
@@ -32,19 +33,22 @@ $(function() {
 	    	} else {
 				history.pushState(null, null, url);
 	    	};
-	    	$("body").trigger('submitComplete');
-//	    	form.trigger('submitComplete');
+	    	// custom event that anybody can listen to
+	    	$('#'+formId).trigger('submitComplete');
 	    });
 	});
 
 	// content rendering in a modal window when submitting a form via post
 	$("body").on("submit", 'form[method="post"].render-modal', function(e){
 		e.preventDefault();
-		var $form = $(this);
-		var url = $form.attr("action");
-		$.post(url, $form.serialize(), function(html, textStatus, jqXHR) {
+		var form = $(this);
+		var formId = form.attr('id');
+		var url = form.attr("action");
+		$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
 	    	$("#genericModal .modal-body").html(html);
 			$('#genericModal .render-partial').removeClass('render-partial').addClass('render-modal');
+			// custom event that anybody can listen to
+	    	$('#'+formId).trigger('submitComplete');
 	    });
 	});
 
@@ -77,9 +81,9 @@ $(function() {
 		$("#searchString").attr("value", searchString);
 	});
 	
-//	$('body').on('submitComplete','#deleteTag, #addTag',function(e){
-	$('body').on('submitComplete',function(e){
-		$('#tagsAll').load($('#linkTagsAll').attr('href'));
+	// after form submission of deleteTag and addTag the tags in the sidebar need to be refreshed
+	$('body').on('submitComplete','#deleteTag, #addTag',function(e){
+		$('#tagsAll').load($('#tagsAll').data('link-tags-all'));
 	});
 	
 });
