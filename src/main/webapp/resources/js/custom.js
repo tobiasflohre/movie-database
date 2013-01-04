@@ -15,9 +15,10 @@
 		}));
 		
 		// partial content rendering when submitting a form via post
-		$("body").on("submit", "form[method="post"].render-partial", function(e){
+		$("body").on("submit", "form[method='post'].render-partial", function(e){
 			e.preventDefault();
 			var form = $(this);
+			var formId = form.attr("id");
 			var url = form.attr("action");
 			$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
 		    	$("#pageContent").html(html);
@@ -29,25 +30,26 @@
 					history.pushState(null, null, url);
 		    	};
 		    	// custom event that anybody can listen to
-		    	form.trigger("submitComplete");
+		    	$('#'+formId).trigger("submitComplete");
 		    });
 		});
 	
 		// content rendering in a modal window when submitting a form via post
-		$("body").on("submit", "form[method="post"].render-modal", function(e){
+		$("body").on("submit", "form[method='post'].render-modal", function(e){
 			e.preventDefault();
 			var form = $(this);
+			var formId = form.attr("id");
 			var url = form.attr("action");
 			$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
 		    	$("#genericModal .modal-body").html(html);
 				$("#genericModal .render-partial").removeClass("render-partial").addClass("render-modal");
 				// custom event that anybody can listen to
-		    	form.trigger("submitComplete");
+		    	$('#'+formId).trigger("submitComplete");
 		    });
 		});
 	
 		// partial content rendering when submitting a form via get
-		$("body").on("submit", "form[method="get"].render-partial", function(e){
+		$("body").on("submit", "form[method='get'].render-partial", function(e){
 			e.preventDefault();
 			var form = $(this);
 			var queryParams = form.serialize();
