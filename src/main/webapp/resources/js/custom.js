@@ -20,6 +20,9 @@
 			var form = $(this);
 			var url = form.attr("action");
 			$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
+				// custom event that anybody can listen to
+		    	form.trigger("submitComplete");
+		    	
 		    	$("#pageContent").html(html);
 		    	// if the current url does not reflect the content, the correct url may be specified by a header attribute
 		    	var redirectUrl = jqXHR.getResponseHeader("redirectUrl");
@@ -28,8 +31,6 @@
 		    	} else {
 					history.pushState(null, null, url);
 		    	};
-		    	// custom event that anybody can listen to
-		    	form.trigger("submitComplete");
 		    });
 		});
 	
@@ -39,10 +40,11 @@
 			var form = $(this);
 			var url = form.attr("action");
 			$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
-		    	$("#genericModal .modal-body").html(html);
-				$("#genericModal .render-partial").removeClass("render-partial").addClass("render-modal");
 				// custom event that anybody can listen to
-		    	form.trigger("submitComplete");
+				form.trigger("submitComplete");
+				
+				$("#genericModal .modal-body").html(html);
+				$("#genericModal .render-partial").removeClass("render-partial").addClass("render-modal");
 		    });
 		});
 	
