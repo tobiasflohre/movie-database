@@ -28,7 +28,7 @@ public class CorsFilter extends OncePerRequestFilter {
             response.addHeader("Access-Control-Max-Age", "1800"); //30 min
         }
 		
-        filterChain.doFilter(request, response);
+		filterChain.doFilter(request, response);
 	}
 
 }
