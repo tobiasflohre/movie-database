@@ -15,7 +15,7 @@ import de.codecentric.moviedatabase.hateoas.ControllerLinkBuilderFactory;
 import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
-@RequestMapping(value = "/movies", headers={"X-Requested-With=XMLHttpRequest", "Accept=text/html"})
+@RequestMapping(value = "/movies", headers={"X-Requested-With=XMLHttpRequest"}, produces="text/html")
 public class HtmlPartialMovieController extends AbstractMovieController{
 	
 	public HtmlPartialMovieController(MovieService movieService,

@@ -21,7 +21,7 @@ public class ApplicationInitializer implements WebApplicationInitializer {
 		ServletRegistration.Dynamic dispatcher = 
 				servletContext.addServlet("dispatcher", new DispatcherServlet(rootContext));
 		dispatcher.setLoadOnStartup(1); 
-		dispatcher.addMapping("/");	
+		dispatcher.addMapping("/");
 		
 		servletContext.addFilter("corsFilter", CorsFilter.class)
 			.addMappingForUrlPatterns(null, false, "/*");

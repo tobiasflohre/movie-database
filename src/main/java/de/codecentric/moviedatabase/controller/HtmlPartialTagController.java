@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import de.codecentric.moviedatabase.domain.Tag;
 import de.codecentric.moviedatabase.service.MovieService;
 
-@RequestMapping(value = "/tags", headers={"X-Requested-With=XMLHttpRequest", "Accept=text/html"})
+@RequestMapping(value = "/tags", headers={"X-Requested-With=XMLHttpRequest"}, produces="text/html")
 public class HtmlPartialTagController {
 	
 	private MovieService movieService;

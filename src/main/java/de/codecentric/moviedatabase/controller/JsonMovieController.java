@@ -19,7 +19,7 @@ import de.codecentric.moviedatabase.domain.Movie;
 import de.codecentric.moviedatabase.domain.Tag;
 import de.codecentric.moviedatabase.service.MovieService;
 
-@RequestMapping(value = "/movies", headers="Accept=application/json")
+@RequestMapping(value = "/movies", produces={"application/json", "application/hal+json"})
 public class JsonMovieController {
 
 	private MovieService movieService;
@@ -33,8 +33,8 @@ public class JsonMovieController {
 	}
 	
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
-	public @ResponseBody Resource<Movie> getMovie(@PathVariable UUID id){
-		return movieResourceAssembler.toResource(movieService.findMovieById(id));
+	public @ResponseBody ResponseEntity<Resource<Movie>> getMovie(@PathVariable UUID id){
+		return enableCorsRequests(movieResourceAssembler.toResource(movieService.findMovieById(id)), HttpStatus.OK);
 	}
 	
 	@RequestMapping(method = RequestMethod.GET)
