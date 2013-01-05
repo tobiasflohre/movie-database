@@ -18,7 +18,6 @@
 		$("body").on("submit", "form[method='post'].render-partial", function(e){
 			e.preventDefault();
 			var form = $(this);
-			var formId = form.attr("id");
 			var url = form.attr("action");
 			$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
 		    	$("#pageContent").html(html);
@@ -30,7 +29,7 @@
 					history.pushState(null, null, url);
 		    	};
 		    	// custom event that anybody can listen to
-		    	$('#'+formId).trigger("submitComplete");
+		    	form.trigger("submitComplete");
 		    });
 		});
 	
@@ -38,13 +37,12 @@
 		$("body").on("submit", "form[method='post'].render-modal", function(e){
 			e.preventDefault();
 			var form = $(this);
-			var formId = form.attr("id");
 			var url = form.attr("action");
 			$.post(url, form.serialize(), function(html, textStatus, jqXHR) {
 		    	$("#genericModal .modal-body").html(html);
 				$("#genericModal .render-partial").removeClass("render-partial").addClass("render-modal");
 				// custom event that anybody can listen to
-		    	$('#'+formId).trigger("submitComplete");
+		    	form.trigger("submitComplete");
 		    });
 		});
 	
