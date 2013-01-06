@@ -10,6 +10,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,9 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import de.codecentric.moviedatabase.domain.Movie;
 import de.codecentric.moviedatabase.domain.Tag;
+import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
-@RequestMapping(value = "/movies", produces={"application/json", "application/hal+json"})
+@RequestMapping(value = "/movies", produces={"application/json", "application/hal+json"}, consumes={"application/json", "application/hal+json"})
 public class JsonMovieController {
 
 	private MovieService movieService;
@@ -44,6 +46,16 @@ public class JsonMovieController {
 		MovieUtil.convertSearchStringToTagsAndSearchWords(searchString, tags, searchWords);
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		return  enableCorsRequests(movieResourceAssembler.toResource(movies), HttpStatus.OK);
+	}
+	
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	public @ResponseBody ResponseEntity<Resource<Movie>> editMovie(@PathVariable UUID id, @RequestBody MovieForm movieForm) {
+		Movie movie = movieService.findMovieById(id);
+		movie.setDescription(movieForm.getDescription());
+		movie.setStartDate(movieForm.getStartDate());
+		movie.setTitle(movieForm.getTitle());
+		movieService.updateMovie(movie);
+		return getMovie(id);
 	}
 	
 	private <T> ResponseEntity<T> enableCorsRequests(T entity, HttpStatus statusCode) {
