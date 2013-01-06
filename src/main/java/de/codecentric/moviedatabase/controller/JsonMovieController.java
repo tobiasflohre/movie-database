@@ -21,7 +21,7 @@ import de.codecentric.moviedatabase.domain.Tag;
 import de.codecentric.moviedatabase.model.MovieForm;
 import de.codecentric.moviedatabase.service.MovieService;
 
-@RequestMapping(value = "/movies", produces={"application/json", "application/hal+json"}, consumes={"application/json", "application/hal+json"})
+@RequestMapping(value = "/movies", produces={"application/json", "application/hal+json"})
 public class JsonMovieController {
 
 	private MovieService movieService;
@@ -48,7 +48,7 @@ public class JsonMovieController {
 		return  enableCorsRequests(movieResourceAssembler.toResource(movies), HttpStatus.OK);
 	}
 	
-	@RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes={"application/json", "application/hal+json"})
 	public @ResponseBody ResponseEntity<Resource<Movie>> editMovie(@PathVariable UUID id, @RequestBody MovieForm movieForm) {
 		Movie movie = movieService.findMovieById(id);
 		movie.setDescription(movieForm.getDescription());
