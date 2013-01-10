@@ -1,5 +1,6 @@
 package de.codecentric.moviedatabase.controller;
 
+import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import de.codecentric.moviedatabase.domain.Comment;
 import de.codecentric.moviedatabase.domain.Movie;
 import de.codecentric.moviedatabase.domain.Tag;
 import de.codecentric.moviedatabase.model.MovieForm;
@@ -56,6 +58,13 @@ public class JsonMovieController {
 		movie.setTitle(movieForm.getTitle());
 		movieService.updateMovie(movie);
 		return getMovie(id);
+	}
+	
+	@RequestMapping(value = "/{id}/comments", method = RequestMethod.POST, consumes={"text/plain"})
+	public @ResponseBody ResponseEntity<Resource<Movie>> addComment(@PathVariable UUID id, @RequestBody String content) {
+		Movie movie = movieService.findMovieById(id);
+		movie.getComments().add(new Comment(new Date(), content));
+		return enableCorsRequests(movieResourceAssembler.toResource(movie), HttpStatus.CREATED);
 	}
 	
 	private <T> ResponseEntity<T> enableCorsRequests(T entity, HttpStatus statusCode) {
