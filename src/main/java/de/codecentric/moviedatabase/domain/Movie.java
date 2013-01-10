@@ -16,6 +16,10 @@ public class Movie {
 	private Set<Tag> tags = new HashSet<Tag>();
 	private List<Comment> comments = new ArrayList<Comment>();
 
+	public Movie() {
+		// pass
+	}
+	
 	public Movie(UUID id, String title, String description, Date startDate) {
 		this.id = id;
 		this.title = title;

@@ -50,6 +50,14 @@ public class JsonMovieController {
 		return  enableCorsRequests(movieResourceAssembler.toResource(movies), HttpStatus.OK);
 	}
 	
+	@RequestMapping(value = "/new", method = RequestMethod.POST, consumes={"application/json", "application/hal+json"})
+	public @ResponseBody ResponseEntity<Resource<Movie>> addMovie(@RequestBody Movie movie) {
+		// recreate the movie to make sure that the client is not sending too much information, e.g., an ID.
+		Movie result = new Movie(movie.getTitle(), movie.getDescription(), movie.getStartDate());
+		movieService.createMovie(result);
+		return getMovie(result.getId());
+	}
+	
 	@RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes={"application/json", "application/hal+json"})
 	public @ResponseBody ResponseEntity<Resource<Movie>> editMovie(@PathVariable UUID id, @RequestBody MovieForm movieForm) {
 		Movie movie = movieService.findMovieById(id);
