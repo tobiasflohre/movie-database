@@ -1,6 +1,11 @@
 movie-database
 ==============
 
+## Description
+
+The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring HATEOAS and Spring MVC.
+For more information take a look at [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/).
+
 ## Build & Run
 
 From the command line do:
