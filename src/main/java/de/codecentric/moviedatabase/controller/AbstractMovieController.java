@@ -66,6 +66,7 @@ public abstract class AbstractMovieController {
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		List<Resource<Movie>> resourceMovies = movieResourceAssembler.toResource(movies);
 		model.addAttribute("movies", resourceMovies);
+		model.addAttribute("searchString", searchString);
 		return getLogicalViewNamePrefix()+"movies";
 	}
 
