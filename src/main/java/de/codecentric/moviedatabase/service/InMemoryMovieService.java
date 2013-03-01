@@ -139,7 +139,7 @@ public class InMemoryMovieService implements MovieService {
 			for (String searchWord: searchWords){
 				for (Iterator<Movie> it = searchResult.iterator();it.hasNext();){
 					Movie movie = it.next();
-					if (!(movie.getTitle().toLowerCase().contains(searchWord.toLowerCase())) && !(movie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))){
+					if (!(movie.getTitle().toLowerCase().contains(searchWord.toLowerCase())) && !(movie.getDescription() != null && movie.getDescription().toLowerCase().contains(searchWord.toLowerCase()))){
 						it.remove();
 					}
 				}
