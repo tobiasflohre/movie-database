@@ -1,4 +1,4 @@
-movie-database
+movie-database (forked from tobiasflohre)
 ==============
 
 ## Description
@@ -10,7 +10,7 @@ For more information take a look at [this blog post](http://blog.codecentric.de/
 
 From the command line do:
 
-    git clone https://github.com/tobiasflohre/movie-database.git
+    git clone https://github.com/robertmaier/movie-database.git
     cd movie-database
     mvn jetty:run
 
