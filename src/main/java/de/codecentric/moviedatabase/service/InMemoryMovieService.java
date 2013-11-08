@@ -80,6 +80,7 @@ public class InMemoryMovieService implements MovieService {
 	@Override
 	public void addTagToMovie(Tag tag, UUID movieId) {
 		Assert.notNull(tag);
+		Assert.hasText(tag.getLabel());
 		Assert.notNull(movieId);
 		Movie movie = idToMovieMap.get(movieId);
 		if (movie == null){
