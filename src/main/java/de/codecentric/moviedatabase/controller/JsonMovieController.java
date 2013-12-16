@@ -68,6 +68,14 @@ public class JsonMovieController {
 		return getMovie(id);
 	}
 	
+	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
+	public @ResponseBody ResponseEntity<Object> deleteMovie(@PathVariable UUID id) {
+		movieService.deleteMovie(id);
+		HttpHeaders headers = new HttpHeaders();
+		headers.set("Access-Control-Allow-Origin", "*");
+		return new ResponseEntity<Object>(null, headers, HttpStatus.NO_CONTENT);
+	}
+	
 	@RequestMapping(value = "/{id}/comments", method = RequestMethod.POST, consumes={"text/plain"})
 	public @ResponseBody ResponseEntity<Resource<Movie>> addComment(@PathVariable UUID id, @RequestBody String content) {
 		Movie movie = movieService.findMovieById(id);
