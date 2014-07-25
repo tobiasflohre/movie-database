@@ -15,3 +15,7 @@ From the command line do:
     mvn jetty:run
 
 Access [http://localhost:8080/movies](http://localhost:8080/movies) in your browser.
+
+## Acceptances Tests with Geb
+
+The Geb/Spock/cucumber-jvm acceptance tests for the movie-database have been moved to a separate repository: [https://github.com/mlex/geb-demo](https://github.com/mlex/geb-demo).

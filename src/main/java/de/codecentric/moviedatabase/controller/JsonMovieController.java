@@ -49,6 +49,11 @@ public class JsonMovieController {
 		List<Movie> movies = movieService.findMovieByTagsAndSearchString(tags, searchWords);
 		return  enableCorsRequests(movieResourceAssembler.toResource(movies), HttpStatus.OK);
 	}
+
+        @RequestMapping(method = RequestMethod.POST, consumes={"application/json", "application/hal+json"})
+	public @ResponseBody ResponseEntity<Resource<Movie>> addMovieForSenchaTouch(@RequestBody Movie movie) {
+ 	        return addMovie(movie);
+	}
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST, consumes={"application/json", "application/hal+json"})
 	public @ResponseBody ResponseEntity<Resource<Movie>> addMovie(@RequestBody Movie movie) {
