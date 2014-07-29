@@ -1,6 +1,7 @@
 ;(function($, undefined) {
 	$(function() {
 		// enabling back button with JavaScript
+		$("#navigationcms").load("http://127.0.0.1:8080/opencms/opencms/index.html #navigationbar");
 		setTimeout(function() {
 			$(window).bind("popstate", function(e) {
 				$("#pageContent").load(location.href);
