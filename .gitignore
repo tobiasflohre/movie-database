@@ -11,3 +11,4 @@ src/main/webapp/META-INF/MANIFEST.MF
 /.classpath
 /.settings
 /.externalToolBuilders
+.DS_Store
