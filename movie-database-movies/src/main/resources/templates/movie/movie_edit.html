@@ -1,0 +1,56 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag"/>
+  <body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div class="row">
+			<div th:include="navigation/sidebar :: sidebar"></div>
+			<div  id="pageContent" th:fragment="movie_edit">
+				<div class="span10">
+					<div class="row">
+						<h2 class="span4 offset2" th:text="${movieForm.pageTitle}">Edit a movie</h2>
+					</div>
+					<div class="row">
+						<form class="form-horizontal render-partial" action="#" th:action="@{${actionLink.href}}" th:object="${movieForm}" method="post">
+						  <input type="hidden" id="_method" name="_method" th:value="${movieForm.requestMethod}"/>
+						  <div class="control-group" style="padding-top:20px">
+							<label class="control-label" for="title">Title</label>
+							<div class="controls">
+							  <input class="input-block-level" type="text" id="title" th:field="*{title}" value="Star Wars"/>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="startDate">Release date</label>
+							<div class="controls">
+							  <input class="input-block-level" type="date" id="startDate" th:field="*{startDate}"/>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="description">Description</label>
+							<div class="controls">
+								<textarea class="input-block-level" rows="5" id="description" th:field="*{description}">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+	
+	Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+	
+	Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</textarea>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<div class="controls">
+							  <label class="checkbox" th:if="${movieForm.showAddAnotherMovie}">
+							  	<input type="checkbox" th:field="*{addAnotherMovie}"/>Add another movie
+							  </label>
+							  <button type="submit" class="btn btn-primary">Save</button>
+							  <a href="./movie.html" th:href="${cancelLink.href}" class="btn render-partial">Cancel</a>
+							</div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

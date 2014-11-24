@@ -1,0 +1,38 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag"/>
+  <body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div class="row">
+			<div th:include="navigation/sidebar :: sidebar"></div>
+			<div id="pageContent" th:fragment="tags">
+				<div class="span2"></div>
+				<div class="span4">
+					<div class="row">
+						<h2 class="span4">Tags</h2>
+					</div>
+					<div class="row" th:each="tag : ${tags}">
+						<div class="span3">
+							<form id="deleteTag" class="form-inline render-partial" action="#" th:action="@{${tag.getLink('self').href}}" method="post">
+								<input type="hidden" id="_method" name="_method" value="delete"/>
+								<span class="badge badge-info" th:text="${tag.content.label}">Science Fiction</span>
+								<button class="btn btn-mini" type="submit"><i class="icon-trash"></i></button>
+							</form>
+						</div>
+					</div>
+					<div class="row" style="padding: 10px"></div>
+					<div class="row">
+						<form id="addTag" class="form-inline span4 render-partial" style="padding-top:20 px" action="#" th:action="${movie.getLink('tags').href}" method="post">
+							<input type="text" class="input-medium" placeholder="New tag" name="tag" required="required" />
+							<button type="submit" class="btn btn-primary">Add tag</button>
+						</form>
+					</div>
+				</div>
+				<div class="span4"></div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

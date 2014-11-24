@@ -1,0 +1,44 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag"/>
+  <body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div class="row">
+			<div th:include="navigation/sidebar :: sidebar"></div>
+			<div id="pageContent" th:fragment="comments">
+				<div class="span10">
+					<div class="row">
+						<h2 class="span4 offset2">Comments</h2>
+					</div>
+					<div class="row" th:each="comment : ${movie.content.comments}">
+						<div class="span2">
+							<span th:text="${#dates.format(comment.creationDate, 'dd.MM.yyyy')}">22.12.2012</span>
+						</div>
+						<div class="span8">
+							<p th:text="${comment.content}">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+						</div>
+					</div>
+					<div class="row">
+						<form class="form-horizontal render-partial" action="#" th:action="@{${movie.getLink('comments').href}}" method="post">
+						  <div class="control-group">
+							<label class="control-label" for="inputDescription">New comment</label>
+							<div class="controls">
+								<textarea class="input-block-level" rows="5" id="content" name="content"></textarea>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<div class="controls">
+							  <button type="submit" class="btn btn-primary">Add comment</button>
+							  <a href="./movie.html" th:href="${movie.getLink('self').href}" class="btn render-partial">Cancel</a>
+							</div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

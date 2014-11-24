@@ -1,0 +1,15 @@
+			<div class="navbar navbar-inverse navbar-fixed-top">
+			  <div class="navbar-inner">
+				<div class="container-fluid">
+					<div id="searchbar" class="row" style="padding-top: 20px; padding-left: 20px">
+						<a id="home" class="brand render-partial" href="../movies.html" th:href="${moviesLink.href}">Movie Database</a>
+						<form class="form-search pull-left render-partial" action="#" th:action="@{${searchUrl}}" method="get">
+							<div class="input-append">
+								<input type="text" id="searchString" name="searchString" class="search-query input-xxlarge" th:value="${param.searchString != null ? param.searchString[0]:''}"/>
+								<button type="submit" class="btn btn-primary">Search</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			  </div>
+			</div>

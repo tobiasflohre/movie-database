@@ -1,0 +1,41 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag"/>
+  <body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div class="row">
+			<div th:include="navigation/sidebar :: sidebar"></div>
+			<div  id="pageContent" th:fragment="movie">
+				<div class="span10">
+					<div class="row">
+						<h2 class="span4 offset2" th:text="${movie.content.title}">Star Wars</h2>
+					</div>
+					<div class="row">
+						<div class="span2">
+							<span>Release date</span>
+						</div>
+						<div class="span8">
+							<p th:if="${movie.content.startDate != null}" th:text="${#dates.format(movie.content.startDate, 'dd.MM.yyyy')}">22.12.2012</p>
+						</div>
+					</div>
+					<div class="row">
+						<div class="span2">
+							<span>Description</span>
+						</div>
+						<div class="span8">
+							<p th:text="${movie.content.description}">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.</p>
+						</div>
+					</div>
+					<div class="row">
+						<a class="btn btn-primary offset2 render-partial" href="./movie_edit.html" th:href="${movie.getLink('edit').href}">Edit</a>
+						<a class="btn render-partial" href="./comments.html" th:href="${movie.getLink('comments').href}">Comments</a>
+						<a class="btn render-partial" href="./tags.html" th:href="${movie.getLink('tags').href}">Tags</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
