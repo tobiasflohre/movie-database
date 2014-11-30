@@ -1,5 +1,7 @@
 package de.codecentric.roca.core;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -36,7 +38,11 @@ public class LinkBuilder {
 	}
 
 	public LinkBuilder requestParam(RequestParameter param, String value) {
-		requestParams.put(param, value);
+		try {
+			requestParams.put(param, URLEncoder.encode(value, "UTF-8"));
+		} catch (UnsupportedEncodingException e) {
+			throw new RuntimeException(e);
+		}
 		return this;
 	}
 	

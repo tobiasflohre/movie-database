@@ -1,4 +1,4 @@
-package de.codecentric.moviedatabase.navigation.controller;
+package de.codecentric.moviedatabase.actors.controller;
 
 import de.codecentric.roca.core.Relation;
 
@@ -9,16 +9,19 @@ import de.codecentric.roca.core.Relation;
  * 
  * @author tobias.flohre
  */
-public enum NavRelation implements Relation {
+public enum ActorRelation implements Relation {
 	
+	SEARCH("search"),
+	NEW("new"), 
 	SELF("self"), 
-	MOVIES("movies"),
-	ACTORS("actors"),
-	SEARCH("search");
+	DELETE("delete"),
+	EDIT("edit"), 
+	ACTORS("actors"), 
+	NAVIGATION("navigation");
 	
 	private String name;
 
-	private NavRelation(String name) {
+	private ActorRelation(String name) {
 		this.name = name;
 	}
 

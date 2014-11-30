@@ -1,0 +1,16 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag"/>
+  <body>
+	<div class="container-fluid">
+		<div class="row">
+			<div th:fragment="sidebar">
+				<div class="span2 well">
+					<a href="../actor_edit.html" th:href="${linkNewActor.href}" class="btn btn-large btn-primary">Add actor</a>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>

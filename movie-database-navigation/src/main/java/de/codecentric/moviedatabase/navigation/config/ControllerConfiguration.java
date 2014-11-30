@@ -12,9 +12,12 @@ public class ControllerConfiguration {
 	@Value("${moviedatabase.movies.url.base}")
 	private String moviesBaseUrl;
 	
+	@Value("${moviedatabase.actors.url.base}")
+	private String actorsBaseUrl;
+	
 	@Bean
 	public NavigationController navigationController(){
-		return new NavigationController(moviesBaseUrl);
+		return new NavigationController(moviesBaseUrl,actorsBaseUrl);
 	}
 
 }
