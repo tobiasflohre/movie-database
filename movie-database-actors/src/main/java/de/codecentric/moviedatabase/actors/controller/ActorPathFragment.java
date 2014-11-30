@@ -1,15 +1,17 @@
-package de.codecentric.moviedatabase.navigation.controller;
+package de.codecentric.moviedatabase.actors.controller;
 
 import de.codecentric.roca.core.PathFragment;
 
-public enum NavPathFragment implements PathFragment {
+public enum ActorPathFragment implements PathFragment {
 	
-	MOVIES("movies"),
-	ACTORS("actors");
+	NEW("new"), 
+	EDIT("edit"),
+	ACTORS("actors"), 
+	NAVIGATION("navigation");
 	
 	private String name;
 
-	private NavPathFragment(String name) {
+	private ActorPathFragment(String name) {
 		this.name = name;
 	}
 

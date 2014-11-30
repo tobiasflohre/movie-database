@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag">
+    <title>Movie Database</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/css/bootstrap.min.css" 
+    		th:href="@{/webjars/bootstrap/2.2.1/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <style>
+      body { padding-top: 80px; /* 80px to make the container go all the way
+      to the bottom of the topbar */ }
+    </style>  
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"
+            th:src="@{/webjars/jquery/1.8.2/jquery.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/js/bootstrap.min.js" 
+    		th:src="@{/webjars/bootstrap/2.2.1/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../META-INF/resources/js/custom.js" th:src="@{/js/custom.js}"></script>
+  </head>
+<body>
+	<div class="container-fluid">
+		<div th:fragment="navigation">
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<div id="searchbar" class="row"
+							style="padding-top: 20px; padding-left: 20px">
+							<a id="home" class="brand" href="../movies.html"
+								th:href="${navResource.getLink('movies').href}">Movie Database</a>
+							<ul class="nav">
+								<li th:class="${navResource.active == 'movies'}? 'active'"><a href="#" th:href="${navResource.getLink('movies').href}">Movies</a></li>
+								<li th:class="${navResource.active == 'actors'}? 'active'"><a href="#" th:href="${navResource.getLink('actors').href}">Actors</a></li>
+							</ul>
+							<form class="form-search pull-left" action="#"
+								th:action="@{${navResource.getLink('search').href}}" method="get">
+								<div class="input-append">
+									<input type="text" id="searchString" name="searchString"
+										class="search-query input-xxlarge"
+										th:value="${navResource.searchString}" />
+									<button type="submit" class="btn btn-primary">Search</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

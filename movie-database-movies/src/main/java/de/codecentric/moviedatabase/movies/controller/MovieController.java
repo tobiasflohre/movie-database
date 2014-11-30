@@ -16,6 +16,7 @@ import de.codecentric.moviedatabase.movies.domain.Tag;
 import de.codecentric.moviedatabase.movies.model.MovieForm;
 import de.codecentric.moviedatabase.movies.service.MovieService;
 import de.codecentric.roca.core.Link;
+import de.codecentric.roca.core.LinkBuilder;
 import de.codecentric.roca.core.Resource;
 
 @RequestMapping(value = "/movies", headers={"X-Requested-With!=XMLHttpRequest", "Accept=text/html"})
@@ -38,11 +39,6 @@ public class MovieController extends AbstractMovieController{
 		return tagResourceAssembler.toResource(tags);
 	}
 	
-	@ModelAttribute("linkHome")
-	public Link getLinkHome(){
-		return linkTo(MoviePathFragment.MOVIES).withRel(MovieRelation.SELF);
-	}
-	
 	@ModelAttribute("linkNewMovie")
 	public Link getLinkNewMovie(){
 		return linkTo(MoviePathFragment.MOVIES).path(MoviePathFragment.NEW).withRel(MovieRelation.NEW);
@@ -54,9 +50,15 @@ public class MovieController extends AbstractMovieController{
 	}
 
 	@ModelAttribute("linkNavigation")
-	public Link getLinkNavigation(){
+	public Link getLinkNavigation(@RequestParam(required = false) String searchString){
 		Link searchLink = linkTo(MoviePathFragment.MOVIES).withRel(MovieRelation.SEARCH);
-		return linkTo(navigationBaseUrl).path(MoviePathFragment.NAVIGATION).requestParam(MovieRequestParameter.SEARCH_URL, searchLink.getHref()).withRel(MovieRelation.NAVIGATION);
+		LinkBuilder navigationLinkBuilder = linkTo(navigationBaseUrl).path(MoviePathFragment.NAVIGATION).requestParam(MovieRequestParameter.SEARCH_URL, searchLink.getHref())
+				.requestParam(MovieRequestParameter.ACTIVE, "movies");
+		if (searchString != null){
+			return navigationLinkBuilder.requestParam(MovieRequestParameter.SEARCH_STRING, searchString).withRel(MovieRelation.NAVIGATION);
+		} else {
+			return navigationLinkBuilder.withRel(MovieRelation.NAVIGATION);
+		}
 	}
 
 	//################## movies #################################################

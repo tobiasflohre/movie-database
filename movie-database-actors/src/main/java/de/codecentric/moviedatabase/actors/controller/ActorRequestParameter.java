@@ -1,8 +1,8 @@
-package de.codecentric.moviedatabase.movies.controller;
+package de.codecentric.moviedatabase.actors.controller;
 
 import de.codecentric.roca.core.RequestParameter;
 
-public enum MovieRequestParameter implements RequestParameter {
+public enum ActorRequestParameter implements RequestParameter {
 	
 	SEARCH_STRING("searchString"),
 	SEARCH_URL("searchUrl"), 
@@ -10,7 +10,7 @@ public enum MovieRequestParameter implements RequestParameter {
 	
 	private String name;
 
-	private MovieRequestParameter(String name) {
+	private ActorRequestParameter(String name) {
 		this.name = name;
 	}
 

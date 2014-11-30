@@ -11,15 +11,20 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class NavigationController{
 	
 	private String moviesBaseUrl;
+	private String actorsBaseUrl;
 	
-	public NavigationController(String moviesBaseUrl) {
+	public NavigationController(String moviesBaseUrl, String actorsBaseUrl) {
 		this.moviesBaseUrl = moviesBaseUrl;
+		this.actorsBaseUrl = actorsBaseUrl;
 	}
 
 	@RequestMapping(method = RequestMethod.GET)
-	public String getNavigation(Model model, @RequestParam(required = false) String searchUrl) {
-		model.addAttribute("searchUrl", searchUrl);
-		model.addAttribute("moviesLink", linkTo(moviesBaseUrl).path(NavPathFragment.MOVIES).withRel(NavRelation.MOVIES));
+	public String getNavigation(Model model, @RequestParam String searchUrl, @RequestParam String active, @RequestParam(required = false) String searchString) {
+		NavigationResource navResource = new NavigationResource(active, searchString != null?searchString:"");
+		navResource.add(linkTo(moviesBaseUrl).path(NavPathFragment.MOVIES).withRel(NavRelation.MOVIES));
+		navResource.add(linkTo(actorsBaseUrl).path(NavPathFragment.ACTORS).withRel(NavRelation.ACTORS));
+		navResource.add(linkTo(searchUrl).withRel(NavRelation.SEARCH));
+		model.addAttribute("navResource", navResource);
 		return "navigation/navigation";
 	}
 	

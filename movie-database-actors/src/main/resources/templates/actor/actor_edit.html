@@ -1,0 +1,74 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag">
+    <title>Movie Database</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/css/bootstrap.min.css" 
+    		th:href="@{/webjars/bootstrap/2.2.1/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <style>
+      body { padding-top: 80px; /* 80px to make the container go all the way
+      to the bottom of the topbar */ }
+    </style>  
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"
+            th:src="@{/webjars/jquery/1.8.2/jquery.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/js/bootstrap.min.js" 
+    		th:src="@{/webjars/bootstrap/2.2.1/js/bootstrap.min.js}"></script>
+  </head>
+  <body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div class="row">
+			<div th:include="navigation/sidebar :: sidebar"></div>
+			<div  id="pageContent">
+				<div class="span10">
+					<div class="row">
+						<h2 class="span4 offset2" th:text="${actorForm.pageTitle}">Edit an actor</h2>
+					</div>
+					<div class="row">
+						<form class="form-horizontal" action="#" th:action="@{${actionLink.href}}" th:object="${actorForm}" method="post">
+						  <input type="hidden" id="_method" name="_method" th:value="${actorForm.requestMethod}"/>
+						  <div class="control-group" style="padding-top:20px">
+							<label class="control-label" for="firstname">First name</label>
+							<div class="controls">
+							  <input class="input-block-level" type="text" id="firstname" th:field="*{firstname}" value="Harrison"/>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="lastname">Last name</label>
+							<div class="controls">
+							  <input class="input-block-level" type="text" id="lastname" th:field="*{lastname}" value="Ford"/>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="birthDate">Birthdate</label>
+							<div class="controls">
+							  <input class="input-block-level" type="date" id="birthDate" th:field="*{birthDate}"/>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<label class="control-label" for="biography">Biography</label>
+							<div class="controls">
+								<textarea class="input-block-level" rows="5" id="biography" th:field="*{biography}">Nullam quis risus eget urna mollis ornare vel eu leo. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Nullam id dolor id nibh ultricies vehicula.
+	
+	Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec ullamcorper nulla non metus auctor fringilla. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit. Donec ullamcorper nulla non metus auctor fringilla.
+	
+	Maecenas sed diam eget risus varius blandit sit amet non magna. Donec id elit non mi porta gravida at eget metus. Duis mollis, est non commodo luctus, nisi erat porttitor ligula, eget lacinia odio sem nec elit.</textarea>
+							</div>
+						  </div>
+						  <div class="control-group">
+							<div class="controls">
+							  <label class="checkbox" th:if="${actorForm.showAddAnotherActor}">
+							  	<input type="checkbox" th:field="*{addAnotherActor}"/>Add another actor
+							  </label>
+							  <button type="submit" class="btn btn-primary">Save</button>
+							  <a href="./actor.html" th:href="${cancelLink.href}" class="btn">Cancel</a>
+							</div>
+						  </div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+  </body>
+</html>
