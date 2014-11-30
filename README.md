@@ -8,7 +8,7 @@ The movie-database is a ROCA-style web application built on Bootstrap, jQuery, T
 ## Build & Run
 The movie-database has been updated to use Spring Boot. It also has been split up into three applications, one serving the movies resource, one serving a new actors resource and one serving the navigation header. To run the application in your IDE check out and import all Maven projects, then run the class NavigationApplication in the project movie-database-navigation, the class ActorsApplication in the project movie-database-actors and the class MoviesApplication in the project movie-database-movies. Then access [http://localhost:8080/movies](http://localhost:8080/movies) in your browser.
 
-## Build & Run (classic)
+## Build & Run (classic branch)
 
 From the command line do:
 
