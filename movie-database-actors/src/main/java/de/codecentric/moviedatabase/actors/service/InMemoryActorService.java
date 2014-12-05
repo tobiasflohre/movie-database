@@ -2,6 +2,7 @@ package de.codecentric.moviedatabase.actors.service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class InMemoryActorService implements ActorService {
 		// let the dummy Actor have always the same ID to test it easily via command line tools / unit tests
 		Actor actor = new Actor(UUID.fromString("240342ea-84c8-415f-b1d5-8e4376191aeb"),
 				"Harrison","Ford", new Date(),"Ewiger Nebendarsteller");
+		actor.getMovieIds().add(UUID.fromString("240342ea-84c8-415f-b1d5-8e4376191aeb"));
 		idToActorMap.put(actor.getId(), actor);
 	}
 	
@@ -55,8 +57,21 @@ public class InMemoryActorService implements ActorService {
 	}
 
 	@Override
-	public List<Actor> findActorBySearchString(Set<String> searchWords) {
-		List<Actor> searchResult = new ArrayList<Actor>(idToActorMap.values());
+	public List<Actor> findActorBySearchStringAndMovieIds(Set<String> searchWords, Set<UUID> movieIds) {
+		Set<Actor> actorsFoundByMovieId = new HashSet<>();
+		List<Actor> searchResult = new ArrayList<>();
+		if (movieIds == null || movieIds.isEmpty()){
+			actorsFoundByMovieId = new HashSet<>(idToActorMap.values());
+		} else {
+			for (UUID movieId: movieIds){
+				for (Actor actor: idToActorMap.values()){
+					if (actor.getMovieIds().contains(movieId)){
+						actorsFoundByMovieId.add(actor);
+					}
+				}
+			}
+		}
+		searchResult.addAll(actorsFoundByMovieId);
 		if (searchWords != null && !searchWords.isEmpty()){
 			for (String searchWord: searchWords){
 				for (Iterator<Actor> it = searchResult.iterator();it.hasNext();){

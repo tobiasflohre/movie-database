@@ -9,7 +9,8 @@ public enum MoviePathFragment implements PathFragment {
 	TAGS("tags"), 
 	EDIT("edit"),
 	MOVIES("movies"), 
-	NAVIGATION("navigation");
+	NAVIGATION("navigation"),
+	ACTORS("actors");
 	
 	private String name;
 

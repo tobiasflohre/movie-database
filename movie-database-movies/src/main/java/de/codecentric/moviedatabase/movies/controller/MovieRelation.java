@@ -19,7 +19,8 @@ public enum MovieRelation implements Relation {
 	DELETE("delete"),
 	EDIT("edit"), 
 	MOVIES("movies"), 
-	NAVIGATION("navigation");
+	NAVIGATION("navigation"),
+	ACTORS("actors");
 	
 	private String name;
 

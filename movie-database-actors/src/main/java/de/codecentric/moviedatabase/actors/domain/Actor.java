@@ -1,6 +1,8 @@
 package de.codecentric.moviedatabase.actors.domain;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 public class Actor {
@@ -10,6 +12,7 @@ public class Actor {
 	private String lastname;
 	private Date birthDate;
 	private String biography;
+	private Set<UUID> movieIds = new HashSet<>();
 
 	public Actor() {
 		// pass
@@ -64,6 +67,10 @@ public class Actor {
 
 	public void setBiography(String biography) {
 		this.biography = biography;
+	}
+
+	public Set<UUID> getMovieIds() {
+		return movieIds;
 	}
 
 	@Override

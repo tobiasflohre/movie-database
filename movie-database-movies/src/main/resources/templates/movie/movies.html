@@ -23,6 +23,8 @@
 									<td class="span1"><a class="render-modal" id="moviesTagsLink"
 										href="./tags.html" th:href="${movie.getLink('tags').href}"><i
 											class="icon-tags"></i></a></td>
+									<td class="span1"><a class="render-modal" href="#" th:href="${movie.getLink('actors').href}"><i
+											class="icon-user"></i></a></td>
 								</tr>
 								<tr th:remove="all">
 									<td><a href="./movie.html">Star Wars</a></td>
@@ -36,7 +38,7 @@
 				<div id="genericModal" class="modal hide" tabindex="-1"
 					role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 					<div class="modal-body">
-						<p>One fine body</p>
+						<p></p>
 					</div>
 				</div>
 			</div>

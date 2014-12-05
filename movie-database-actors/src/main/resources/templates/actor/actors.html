@@ -24,16 +24,18 @@
 					<div class="row">
 						<div class="span10" style="padding-top: 20px">
 							<p class="searchDescription">Search-Result for <i class="searchString" th:text="${searchString}"></i></p>
-							<table class="table table-striped table-hover">
-								<tr th:each="actor : ${actors}">
-									<td class="span6"><a href="./actor.html"
-										th:href="${actor.getLink('self').href}"
-										th:text="${actor.content.firstname}+' '+${actor.content.lastname}">Claire Danes</a></td>
-								</tr>
-								<tr th:remove="all">
-									<td><a href="./actor.html">Harrison Ford</a></td>
-								</tr>
-							</table>
+							<div  th:fragment="actors">
+								<table class="table table-striped table-hover">
+									<tr th:each="actor : ${actors}">
+										<td class="span6"><a href="./actor.html"
+											th:href="${actor.getLink('self').href}"
+											th:text="${actor.content.firstname}+' '+${actor.content.lastname}">Claire Danes</a></td>
+									</tr>
+									<tr th:remove="all">
+										<td><a href="./actor.html">Harrison Ford</a></td>
+									</tr>
+								</table>
+							</div>
 						</div>
 					</div>
 				</div>

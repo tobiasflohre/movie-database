@@ -11,6 +11,13 @@ import de.codecentric.roca.core.Resource;
 
 public class MovieResourceAssembler extends AbstractResourceAssembler<Movie, Resource<Movie>> {
 	
+	private String actorsBaseUrl;
+	
+	public MovieResourceAssembler(String actorsBaseUrl) {
+		super();
+		this.actorsBaseUrl = actorsBaseUrl;
+	}
+
 	@Override
 	public Resource<Movie> toResource(Movie movie) {
 		Assert.notNull(movie);
@@ -19,7 +26,8 @@ public class MovieResourceAssembler extends AbstractResourceAssembler<Movie, Res
 		Link editLink = linkTo(MoviePathFragment.MOVIES).path(movie.getId()).path(MoviePathFragment.EDIT).withRel(MovieRelation.EDIT);
 		Link commentsLink = linkTo(MoviePathFragment.MOVIES).path(movie.getId()).path(MoviePathFragment.COMMENTS).withRel(MovieRelation.COMMENTS);
 		Link tagsLink = linkTo(MoviePathFragment.MOVIES).path(movie.getId()).path(MoviePathFragment.TAGS).withRel(MovieRelation.TAGS);
-		return new Resource<Movie>(movie, selfLink, moviesLink, editLink, commentsLink, tagsLink);
+		Link actorsLink = linkTo(actorsBaseUrl).path(MoviePathFragment.ACTORS).requestParam(MovieRequestParameter.SEARCH_STRING, "movie:'"+movie.getId()+"'").withRel(MovieRelation.ACTORS);
+		return new Resource<Movie>(movie, selfLink, moviesLink, editLink, commentsLink, tagsLink, actorsLink);
 	}
 
 }

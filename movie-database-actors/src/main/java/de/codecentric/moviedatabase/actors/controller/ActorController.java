@@ -21,6 +21,7 @@ import de.codecentric.moviedatabase.actors.domain.Actor;
 import de.codecentric.moviedatabase.actors.exception.ResourceNotFoundException;
 import de.codecentric.moviedatabase.actors.model.ActorForm;
 import de.codecentric.moviedatabase.actors.service.ActorService;
+import de.codecentric.roca.core.AbstractResourceAssembler;
 import de.codecentric.roca.core.Link;
 import de.codecentric.roca.core.LinkBuilder;
 import de.codecentric.roca.core.Resource;
@@ -30,10 +31,10 @@ public class ActorController {
 	
 	private String navigationBaseUrl;
 	private ActorService actorService;
-	private ActorResourceAssembler actorResourceAssembler;
+	private AbstractResourceAssembler<Actor, Resource<Actor>> actorResourceAssembler;
 	
 	public ActorController(ActorService actorService,
-			ActorResourceAssembler actorResourceAssembler, String navigationBaseUrl) {
+			AbstractResourceAssembler<Actor, Resource<Actor>> actorResourceAssembler, String navigationBaseUrl) {
 		this.navigationBaseUrl = navigationBaseUrl;
 		this.actorService = actorService;
 		this.actorResourceAssembler = actorResourceAssembler;
@@ -63,8 +64,9 @@ public class ActorController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String getActors(Model model, @RequestParam(required = false) String searchString) {
 		Set<String> searchWords = new HashSet<String>();
-		ActorsUtil.convertSearchStringToSearchWords(searchString, searchWords);
-		List<Actor> actors = actorService.findActorBySearchString(searchWords);
+		Set<UUID> movieIds = new HashSet<>();
+		ActorsUtil.convertSearchStringToSearchWords(searchString, searchWords, movieIds);
+		List<Actor> actors = actorService.findActorBySearchStringAndMovieIds(searchWords, movieIds);
 		List<Resource<Actor>> resourceActors = actorResourceAssembler.toResource(actors);
 		model.addAttribute("actors", resourceActors);
 		model.addAttribute("searchString", searchString);

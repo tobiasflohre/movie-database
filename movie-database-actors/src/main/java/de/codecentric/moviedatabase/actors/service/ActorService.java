@@ -16,6 +16,6 @@ public interface ActorService {
 	
 	public Actor findActorById(UUID id);
 	
-	public List<Actor> findActorBySearchString(Set<String> searchWords);
+	public List<Actor> findActorBySearchStringAndMovieIds(Set<String> searchWords, Set<UUID> movieIds);
 
 }

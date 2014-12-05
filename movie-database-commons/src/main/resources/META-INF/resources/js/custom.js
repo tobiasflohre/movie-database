@@ -1,5 +1,9 @@
 ;(function($, undefined) {
 	$(function() {
+		$.ajaxSetup({
+			headers: {'X-Requested-With': 'XMLHttpRequest'}
+		});
+		
 		// enabling back button with JavaScript
 		setTimeout(function() {
 			$(window).bind("popstate", function(e) {
