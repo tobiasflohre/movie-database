@@ -14,7 +14,7 @@ You need to have [Homebrew](http://brew.sh/) installed to do the following.
 Follow [these](https://gist.github.com/netpoetica/5879685) instructions to install nginx. When editing the hosts file, add the line
 
     127.0.0.1 moviedatabase.com
-Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blob/master/moviedatabase.conf) to /usr/local/etc/nginx/conf.d/. Start nginx with sudo nginx, stop it with sudo nginx -s stop.
+Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blob/master/moviedatabase.conf) to /usr/local/etc/nginx/conf.d/. Start nginx with `sudo nginx`, stop it with `sudo nginx -s stop`.
 
 #### Redis
 One fast way to get Redis running is to use a Docker image. If you're on Mac or Windows, you'll need to install [Boot2Docker](http://boot2docker.io/) first and start it. My colleague Ben Ripkens wrote a [nice tool](https://github.com/bripkens/dock) to install standard Docker images fast. To install it, do the following
