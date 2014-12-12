@@ -43,7 +43,7 @@
 							  	<input type="checkbox" th:field="*{addAnotherMovie}"/>Add another movie
 							  </label>
 							  <button type="submit" class="btn btn-primary">Save</button>
-							  <a href="./movie.html" th:href="${cancelLink.href}" class="btn render-partial">Cancel</a>
+							  <a href="./movie.html" th:href="@{${cancelLink.href}}" class="btn render-partial">Cancel</a>
 							</div>
 						  </div>
 						</form>

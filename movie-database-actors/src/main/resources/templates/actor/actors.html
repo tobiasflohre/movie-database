@@ -28,7 +28,7 @@
 								<table class="table table-striped table-hover">
 									<tr th:each="actor : ${actors}">
 										<td class="span6"><a href="./actor.html"
-											th:href="${actor.getLink('self').href}"
+											th:href="@{${actor.getLink('self').href}}"
 											th:text="${actor.content.firstname}+' '+${actor.content.lastname}">Claire Danes</a></td>
 									</tr>
 									<tr th:remove="all">

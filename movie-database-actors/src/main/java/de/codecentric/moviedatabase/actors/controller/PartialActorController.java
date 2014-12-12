@@ -10,7 +10,7 @@ import de.codecentric.moviedatabase.actors.service.ActorService;
 public class PartialActorController extends ActorController {
 
 	public PartialActorController(ActorService actorService,
-			FullUrlActorResourceAssembler actorResourceAssembler,
+			ActorResourceAssembler actorResourceAssembler,
 			String navigationBaseUrl) {
 		super(actorService, actorResourceAssembler, navigationBaseUrl);
 	}

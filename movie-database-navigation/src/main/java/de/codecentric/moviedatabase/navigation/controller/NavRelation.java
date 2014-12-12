@@ -14,7 +14,8 @@ public enum NavRelation implements Relation {
 	SELF("self"), 
 	MOVIES("movies"),
 	ACTORS("actors"),
-	SEARCH("search");
+	SEARCH("search"),
+	LOGOUT("logout");
 	
 	private String name;
 

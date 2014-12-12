@@ -5,6 +5,8 @@ import static de.codecentric.roca.core.LinkBuilder.linkTo;
 import java.util.List;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,8 +52,8 @@ public class MovieController extends AbstractMovieController{
 	}
 
 	@ModelAttribute("linkNavigation")
-	public Link getLinkNavigation(@RequestParam(required = false) String searchString){
-		Link searchLink = linkTo(MoviePathFragment.MOVIES).withRel(MovieRelation.SEARCH);
+	public Link getLinkNavigation(@RequestParam(required = false) String searchString, HttpServletRequest request){
+		Link searchLink = linkTo(request.getContextPath()).path(MoviePathFragment.MOVIES).withRel(MovieRelation.SEARCH);
 		LinkBuilder navigationLinkBuilder = linkTo(navigationBaseUrl).path(MoviePathFragment.NAVIGATION).requestParam(MovieRequestParameter.SEARCH_URL, searchLink.getHref())
 				.requestParam(MovieRequestParameter.ACTIVE, "movies");
 		if (searchString != null){

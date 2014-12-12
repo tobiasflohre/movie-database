@@ -24,7 +24,7 @@
 					</div>
 					<div class="row" style="padding: 10px"></div>
 					<div class="row">
-						<form id="addTag" class="form-inline span4 render-partial" style="padding-top:20 px" action="#" th:action="${movie.getLink('tags').href}" method="post">
+						<form id="addTag" class="form-inline span4 render-partial" style="padding-top:20 px" action="#" th:action="@{${movie.getLink('tags').href}}" method="post">
 							<input type="text" class="input-medium" placeholder="New tag" name="tag" required="required" />
 							<button type="submit" class="btn btn-primary">Add tag</button>
 						</form>

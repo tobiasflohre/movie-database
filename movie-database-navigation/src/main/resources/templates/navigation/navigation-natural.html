@@ -38,6 +38,9 @@
 									<button type="submit" class="btn btn-primary">Search</button>
 								</div>
 							</form>
+                            <form th:action="${navResource.getLink('logout').href}" method="post">
+                                <button class="btn btn-primary pull-right" type="submit">Log out</button>
+                            </form>
 						</div>
 					</div>
 				</div>

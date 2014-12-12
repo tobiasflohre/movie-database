@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
@@ -48,8 +50,8 @@ public class ActorController {
 	}
 	
 	@ModelAttribute("linkNavigation")
-	public Link getLinkNavigation(@RequestParam(required = false) String searchString){
-		Link searchLink = linkTo(ActorPathFragment.ACTORS).withRel(ActorRelation.SEARCH);
+	public Link getLinkNavigation(@RequestParam(required = false) String searchString, HttpServletRequest request){
+		Link searchLink = linkTo(request.getContextPath()).path(ActorPathFragment.ACTORS).withRel(ActorRelation.SEARCH);
 		LinkBuilder navigationLinkBuilder = linkTo(navigationBaseUrl).path(ActorPathFragment.NAVIGATION).requestParam(ActorRequestParameter.SEARCH_URL, searchLink.getHref())
 				.requestParam(ActorRequestParameter.ACTIVE, "actors");
 		if (searchString != null){

@@ -4,13 +4,14 @@ import org.springframework.boot.autoconfigure.thymeleaf.ThymeleafAutoConfigurati
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.templateresolver.UrlTemplateResolver;
 
-import de.codecentric.roca.cors.CorsFilter;
+import de.codecentric.moviedatabase.security.configuration.SecurityConfiguration;
 
 @Configuration 
-@Import(ControllerConfiguration.class)
+@Import({ControllerConfiguration.class, SecurityConfiguration.class})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 	
 	/**
@@ -23,9 +24,10 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 		return urlTemplateResolver;
 	}
 	
-	@Bean
-	public CorsFilter corsFilter(){
-		return new CorsFilter();
+	@Override
+	public void addViewControllers(ViewControllerRegistry registry) {
+		super.addViewControllers(registry);
+		registry.addViewController("/").setViewName("redirect:/actors");
 	}
-	
+
 }

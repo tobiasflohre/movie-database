@@ -29,9 +29,9 @@
 						</div>
 					</div>
 					<div class="row">
-						<a class="btn btn-primary offset2 render-partial" href="./movie_edit.html" th:href="${movie.getLink('edit').href}">Edit</a>
-						<a class="btn render-partial" href="./comments.html" th:href="${movie.getLink('comments').href}">Comments</a>
-						<a class="btn render-partial" href="./tags.html" th:href="${movie.getLink('tags').href}">Tags</a>
+						<a class="btn btn-primary offset2 render-partial" href="./movie_edit.html" th:href="@{${movie.getLink('edit').href}}">Edit</a>
+						<a class="btn render-partial" href="./comments.html" th:href="@{${movie.getLink('comments').href}}">Comments</a>
+						<a class="btn render-partial" href="./tags.html" th:href="@{${movie.getLink('tags').href}}">Tags</a>
 					</div>
 				</div>
 			</div>

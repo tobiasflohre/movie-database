@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag">
+    <title>Movie Database</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/css/bootstrap.min.css" 
+    		th:href="@{/webjars/bootstrap/2.2.1/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <style>
+      body { padding-top: 80px; /* 80px to make the container go all the way
+      to the bottom of the topbar */ }
+    </style>  
+    <script src="http://code.jquery.com/jquery-1.8.2.min.js"
+            th:src="@{/webjars/jquery/1.8.2/jquery.js}"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/2.2.1/js/bootstrap.min.js" 
+    		th:src="@{/webjars/bootstrap/2.2.1/js/bootstrap.min.js}"></script>
+    <script type="text/javascript" src="../META-INF/resources/js/custom.js" th:src="@{/js/custom.js}"></script>
+  </head>
+<body>
+	<div class="container-fluid">
+		<div class="navbar navbar-inverse navbar-fixed-top">
+			<div class="navbar-inner">
+				<div class="container-fluid">
+					<div id="searchbar" class="row"
+						style="padding-top: 20px; padding-left: 20px">
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="span5">
+			<div class="row">
+				<h2 class="span4 offset2">Login</h2>
+			</div>
+			<div class="row">
+            	<form class="form-horizontal" th:action="@{/login}" method="post">
+                	<fieldset>
+					    <div class="control-group" style="padding-top:20px">
+						    <label class="control-label" for="username">Username:</label>
+						    <div class="controls">
+						        <input class="input-block-level" type="text" id="username" name="username"/>
+						    </div>
+					    </div>
+					    <div class="control-group">
+						    <label class="control-label" for="password">Password:</label>
+						    <div class="controls">
+						        <input class="input-block-level" type="password" id="password" name="password"/>
+						    </div>
+					    </div>
+			    		<div class="control-group">
+							<div class="controls">
+                                 <button class="btn btn-primary" type="submit">Login</button>
+                                 <div th:if="${param.error}" class="margin-top">
+                                     <label class="error" th:text="#{login.invalid}">Invalid username and
+                                         password.</label>
+                            	</div>
+                        	</div>
+                    	</div>
+                	</fieldset>
+            	</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

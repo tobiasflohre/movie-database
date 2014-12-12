@@ -31,7 +31,7 @@
 						  <div class="control-group">
 							<div class="controls">
 							  <button type="submit" class="btn btn-primary">Add comment</button>
-							  <a href="./movie.html" th:href="${movie.getLink('self').href}" class="btn render-partial">Cancel</a>
+							  <a href="./movie.html" th:href="@{${movie.getLink('self').href}}" class="btn render-partial">Cancel</a>
 							</div>
 						  </div>
 						</form>

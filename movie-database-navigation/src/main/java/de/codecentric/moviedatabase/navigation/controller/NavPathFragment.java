@@ -5,7 +5,8 @@ import de.codecentric.roca.core.PathFragment;
 public enum NavPathFragment implements PathFragment {
 	
 	MOVIES("movies"),
-	ACTORS("actors");
+	ACTORS("actors"),
+	LOGOUT("logout");
 	
 	private String name;
 

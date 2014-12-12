@@ -15,15 +15,15 @@
 							<table class="table table-striped table-hover">
 								<tr th:each="movie : ${movies}">
 									<td class="span6"><a class="render-partial" href="./movie.html"
-										th:href="${movie.getLink('self').href}"
+										th:href="@{${movie.getLink('self').href}}"
 										th:text="${movie.content.title}">Skyfall</a></td>
 									<td class="span1"><a class="render-partial" href="./comments.html"
-										th:href="${movie.getLink('comments').href}"><i
+										th:href="@{${movie.getLink('comments').href}}"><i
 											class="icon-th-list"></i></a></td>
 									<td class="span1"><a class="render-modal" id="moviesTagsLink"
-										href="./tags.html" th:href="${movie.getLink('tags').href}"><i
+										href="./tags.html" th:href="@{${movie.getLink('tags').href}}"><i
 											class="icon-tags"></i></a></td>
-									<td class="span1"><a class="render-modal" href="#" th:href="${movie.getLink('actors').href}"><i
+									<td class="span1"><a class="render-modal" href="#" th:href="@{${movie.getLink('actors').href}}"><i
 											class="icon-user"></i></a></td>
 								</tr>
 								<tr th:remove="all">
