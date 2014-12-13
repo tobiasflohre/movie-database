@@ -11,7 +11,7 @@ The movie-database has been updated to use Spring Boot. It also has been split u
 You need to have [Homebrew](http://brew.sh/) installed to do the following.
 
 #### nginx
-Follow [these](https://gist.github.com/netpoetica/5879685) instructions to install nginx. When editing the hosts file, add the line
+Follow [these](https://gist.github.com/netpoetica/5879685) instructions to install nginx. When editing the /private/etc/hosts file, add the line
 
     127.0.0.1 moviedatabase.com
 Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blob/master/moviedatabase.conf) to /usr/local/etc/nginx/conf.d/. Start nginx with `sudo nginx`, stop it with `sudo nginx -s stop`.
