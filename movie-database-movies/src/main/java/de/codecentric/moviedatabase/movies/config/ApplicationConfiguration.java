@@ -8,10 +8,11 @@ import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.thymeleaf.templateresolver.UrlTemplateResolver;
 
+import de.codecentric.moviedatabase.navigation.FallbackNavigationConfiguration;
 import de.codecentric.moviedatabase.security.configuration.SecurityConfiguration;
 
 @Configuration 
-@Import({ControllerConfiguration.class, SecurityConfiguration.class})
+@Import({ControllerConfiguration.class, SecurityConfiguration.class, FallbackNavigationConfiguration.class})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 	
 	/**

@@ -1,0 +1,18 @@
+			<div class="navbar navbar-inverse navbar-fixed-top">
+				<div class="navbar-inner">
+					<div class="container-fluid">
+						<div id="searchbar" class="row"
+							style="padding-top: 20px; padding-left: 20px">
+							<a id="home" class="brand" href="../movies.html"
+								th:href="'/movie-app/movies'">Movie Database</a>
+							<ul class="nav">
+								<li><a href="#" th:href="'/movie-app/movies'">Movies</a></li>
+								<li><a href="#" th:href="'/actor-app/actors'">Actors</a></li>
+							</ul>
+                            <form th:action="@{/logout}" method="post">
+                                <button class="btn btn-primary pull-right" type="submit">Log out</button>
+                            </form>
+						</div>
+					</div>
+				</div>
+			</div>
