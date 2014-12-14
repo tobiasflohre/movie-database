@@ -20,7 +20,8 @@ public enum MovieRelation implements Relation {
 	EDIT("edit"), 
 	MOVIES("movies"), 
 	NAVIGATION("navigation"),
-	ACTORS("actors");
+	ACTORS("actors"), 
+	ADD_ACTOR("add_actor");
 	
 	private String name;
 

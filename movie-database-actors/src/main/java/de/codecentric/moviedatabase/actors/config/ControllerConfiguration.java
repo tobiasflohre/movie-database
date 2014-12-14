@@ -17,6 +17,9 @@ public class ControllerConfiguration {
 	@Value("${moviedatabase.navigation.url.base}")
 	private String navigationBaseUrl;
 	
+	@Value("${server.context-path}")
+	private String serverContextPath;
+	
 	@Autowired
 	private ServiceConfiguration serviceConfiguration;
 	
@@ -27,12 +30,12 @@ public class ControllerConfiguration {
 	
 	@Bean
 	public ActorController actorController(){
-		return new ActorController(serviceConfiguration.actorService(), actorResourceAssembler(), navigationBaseUrl);
+		return new ActorController(serviceConfiguration.actorService(), serverContextPath, actorResourceAssembler(), navigationBaseUrl);
 	}
 
 	@Bean
 	public PartialActorController partialActorController(){
-		return new PartialActorController(serviceConfiguration.actorService(), actorResourceAssembler(), navigationBaseUrl);
+		return new PartialActorController(serviceConfiguration.actorService(), serverContextPath, actorResourceAssembler(), navigationBaseUrl);
 	}
 
 }

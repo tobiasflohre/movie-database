@@ -22,6 +22,9 @@ public class ControllerConfiguration {
 	@Value("${moviedatabase.actors.url.base}")
 	private String actorsBaseUrl;
 	
+	@Value("${server.context-path}")
+	private String serverContextPath;
+	
 	@Autowired
 	private ServiceConfiguration serviceConfiguration;
 	
@@ -32,7 +35,7 @@ public class ControllerConfiguration {
 	
 	@Bean
 	public MovieResourceAssembler movieResourceAssembler(){
-		return new MovieResourceAssembler(actorsBaseUrl);
+		return new MovieResourceAssembler(actorsBaseUrl, serverContextPath);
 	}
 	
 	@Bean

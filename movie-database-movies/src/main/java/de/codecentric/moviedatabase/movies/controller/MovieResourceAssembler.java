@@ -12,10 +12,12 @@ import de.codecentric.roca.core.Resource;
 public class MovieResourceAssembler extends AbstractResourceAssembler<Movie, Resource<Movie>> {
 	
 	private String actorsBaseUrl;
+	private String serverContextPath;
 	
-	public MovieResourceAssembler(String actorsBaseUrl) {
+	public MovieResourceAssembler(String actorsBaseUrl, String serverContextPath) {
 		super();
 		this.actorsBaseUrl = actorsBaseUrl;
+		this.serverContextPath = serverContextPath;
 	}
 
 	@Override
@@ -27,7 +29,8 @@ public class MovieResourceAssembler extends AbstractResourceAssembler<Movie, Res
 		Link commentsLink = linkTo(MoviePathFragment.MOVIES).path(movie.getId()).path(MoviePathFragment.COMMENTS).withRel(MovieRelation.COMMENTS);
 		Link tagsLink = linkTo(MoviePathFragment.MOVIES).path(movie.getId()).path(MoviePathFragment.TAGS).withRel(MovieRelation.TAGS);
 		Link actorsLink = linkTo(actorsBaseUrl).path(MoviePathFragment.ACTORS).requestParam(MovieRequestParameter.SEARCH_STRING, "movie:'"+movie.getId()+"'").withRel(MovieRelation.ACTORS);
-		return new Resource<Movie>(movie, selfLink, moviesLink, editLink, commentsLink, tagsLink, actorsLink);
+		Link addActorLink = linkTo(actorsBaseUrl).path(MoviePathFragment.ACTORS).path(MoviePathFragment.NEW).requestParam(MovieRequestParameter.RETURN_URL, serverContextPath+selfLink.getHref()).requestParam(MovieRequestParameter.MOVIE_ID, movie.getId().toString()).withRel(MovieRelation.ADD_ACTOR);
+		return new Resource<Movie>(movie, selfLink, moviesLink, editLink, commentsLink, tagsLink, actorsLink, addActorLink);
 	}
 
 }

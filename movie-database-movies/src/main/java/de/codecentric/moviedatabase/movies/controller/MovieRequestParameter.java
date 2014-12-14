@@ -6,7 +6,9 @@ public enum MovieRequestParameter implements RequestParameter {
 	
 	SEARCH_STRING("searchString"),
 	SEARCH_URL("searchUrl"), 
-	ACTIVE("active");
+	ACTIVE("active"), 
+	RETURN_URL("returnUrl"), 
+	MOVIE_ID("movieId");
 	
 	private String name;
 

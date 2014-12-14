@@ -27,6 +27,7 @@
 					<div class="row">
 						<form class="form-horizontal" action="#" th:action="@{${actionLink.href}}" th:object="${actorForm}" method="post">
 						  <input type="hidden" id="_method" name="_method" th:value="${actorForm.requestMethod}"/>
+						  <input type="hidden" id="movieId" name="movieId" th:value="${actorForm.movieId}"/>
 						  <div class="control-group" style="padding-top:20px">
 							<label class="control-label" for="firstname">First name</label>
 							<div class="controls">
@@ -61,7 +62,7 @@
 							  	<input type="checkbox" th:field="*{addAnotherActor}"/>Add another actor
 							  </label>
 							  <button type="submit" class="btn btn-primary">Save</button>
-							  <a href="./actor.html" th:href="@{${cancelLink.href}}" class="btn">Cancel</a>
+							  <a href="./actor.html" th:href="${cancelLink.href}" class="btn">Cancel</a>
 							</div>
 						  </div>
 						</form>

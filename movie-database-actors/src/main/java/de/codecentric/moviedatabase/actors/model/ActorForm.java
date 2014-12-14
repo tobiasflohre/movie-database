@@ -1,6 +1,7 @@
 package de.codecentric.moviedatabase.actors.model;
 
 import java.util.Date;
+import java.util.UUID;
 
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.format.annotation.DateTimeFormat.ISO;
@@ -22,6 +23,7 @@ public class ActorForm {
 	@DateTimeFormat(iso=ISO.DATE)
 	private Date birthDate;
 	private boolean addAnotherActor = false;
+	private UUID movieId;
 	
 	public ActorForm(){
 		pageTitle = "Add an actor";
@@ -41,6 +43,14 @@ public class ActorForm {
 		this.lastname = actor.getLastname();
 		this.birthDate = actor.getBirthDate();
 		this.biography = actor.getBiography();
+	}
+
+	public UUID getMovieId() {
+		return movieId;
+	}
+
+	public void setMovieId(UUID movieId) {
+		this.movieId = movieId;
 	}
 
 	public String getFirstname() {
@@ -81,6 +91,10 @@ public class ActorForm {
 
 	public RequestMethod getRequestMethod() {
 		return requestMethod;
+	}
+
+	public void setShowAddAnotherActor(boolean showAddAnotherActor) {
+		this.showAddAnotherActor = showAddAnotherActor;
 	}
 
 	public boolean isShowAddAnotherActor() {

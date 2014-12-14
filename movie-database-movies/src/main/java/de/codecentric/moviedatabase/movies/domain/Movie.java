@@ -15,7 +15,6 @@ public class Movie {
 	private Date startDate;
 	private Set<Tag> tags = new HashSet<Tag>();
 	private List<Comment> comments = new ArrayList<Comment>();
-	private Set<UUID> actorIds = new HashSet<>();
 
 	public Movie() {
 		// pass
@@ -68,10 +67,6 @@ public class Movie {
 		return comments;
 	}
 	
-	public Set<UUID> getActorIds() {
-		return actorIds;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;

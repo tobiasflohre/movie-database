@@ -9,10 +9,10 @@ import de.codecentric.moviedatabase.actors.service.ActorService;
 @RequestMapping(value = "/actors", headers={"X-Requested-With=XMLHttpRequest"}, produces="text/html")
 public class PartialActorController extends ActorController {
 
-	public PartialActorController(ActorService actorService,
+	public PartialActorController(ActorService actorService, String serverContextPath,
 			ActorResourceAssembler actorResourceAssembler,
 			String navigationBaseUrl) {
-		super(actorService, actorResourceAssembler, navigationBaseUrl);
+		super(actorService, serverContextPath, actorResourceAssembler, navigationBaseUrl);
 	}
 
 	@Override

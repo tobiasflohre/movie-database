@@ -6,7 +6,8 @@ public enum ActorRequestParameter implements RequestParameter {
 	
 	SEARCH_STRING("searchString"),
 	SEARCH_URL("searchUrl"), 
-	ACTIVE("active");
+	ACTIVE("active"), 
+	RETURN_URL("returnUrl");
 	
 	private String name;
 

@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.View;
+import org.springframework.web.servlet.view.RedirectView;
 
 import de.codecentric.moviedatabase.actors.domain.Actor;
 import de.codecentric.moviedatabase.actors.exception.ResourceNotFoundException;
@@ -32,14 +34,16 @@ import de.codecentric.roca.core.Resource;
 public class ActorController {
 	
 	private String navigationBaseUrl;
+	private String serverContextPath;
 	private ActorService actorService;
 	private AbstractResourceAssembler<Actor, Resource<Actor>> actorResourceAssembler;
 	
-	public ActorController(ActorService actorService,
+	public ActorController(ActorService actorService, String serverContextPath,
 			AbstractResourceAssembler<Actor, Resource<Actor>> actorResourceAssembler, String navigationBaseUrl) {
 		this.navigationBaseUrl = navigationBaseUrl;
 		this.actorService = actorService;
 		this.actorResourceAssembler = actorResourceAssembler;
+		this.serverContextPath = serverContextPath;
 	}
 
 	//################### side- and searchbar data ###########################
@@ -79,18 +83,37 @@ public class ActorController {
 	public String getCreateActor(Model model) {
 		model.addAttribute("actorForm", new ActorForm());
 		model.addAttribute("actionLink", linkTo(ActorPathFragment.ACTORS).withRel(ActorRelation.SELF));
-		model.addAttribute("cancelLink", linkTo(ActorPathFragment.ACTORS).withRel(ActorRelation.SELF));
+		model.addAttribute("cancelLink", linkTo(serverContextPath).path(ActorPathFragment.ACTORS).withRel(ActorRelation.SELF));
+		return "actor/actor_edit";
+	}
+	
+	@RequestMapping(value = "/new", method = RequestMethod.GET, params={"returnUrl","movieId"})
+	public String getCreateActorForMovie(Model model, @RequestParam String returnUrl, @RequestParam UUID movieId) {
+		ActorForm actorForm = new ActorForm();
+		actorForm.setShowAddAnotherActor(false);
+		actorForm.setMovieId(movieId);
+		Link actionLink = linkTo(ActorPathFragment.ACTORS).requestParam(ActorRequestParameter.RETURN_URL, returnUrl).withRel(ActorRelation.SELF);
+		Link cancelLink = linkTo(returnUrl).withRel(ActorRelation.SELF);
+		model.addAttribute("actorForm", actorForm);
+		model.addAttribute("actionLink", actionLink);
+		model.addAttribute("cancelLink", cancelLink);
 		return "actor/actor_edit";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public String createActor(ActorForm actorForm) {
+	public View createActor(ActorForm actorForm, @RequestParam(required = false) String returnUrl) {
 		Actor actor = new Actor(actorForm.getFirstname(), actorForm.getLastname(), actorForm.getBirthDate(), actorForm.getBiography());
+		if (actorForm.getMovieId() != null){
+			actor.getMovieIds().add(actorForm.getMovieId());
+		}
 		actorService.createActor(actor);
 		if (actorForm.isAddAnotherActor()){
-			return "redirect:/actors/new";
+			return new RedirectView("/actors/new",true);
 		}
-		return "redirect:/actors";
+		if (returnUrl != null){
+			return new RedirectView(returnUrl);
+		}
+		return new RedirectView("/actors",true);
 	}
 	
 	//########################### actor #####################################################
