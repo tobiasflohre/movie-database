@@ -57,6 +57,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http
                 .addFilter(cookieAuthenticationFilter) 
                 .authorizeRequests()
+                .antMatchers("/mappings/**","/env/**","/health/**","/metrics/**","/trace/**","/dump/**","/beans/**","/info/**","/autoconfig/**","/configprops/**","/logfile/**","/jolokia/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()

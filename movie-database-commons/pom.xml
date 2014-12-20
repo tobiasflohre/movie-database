@@ -4,15 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<groupId>de.codecentric</groupId>
+		<artifactId>movie-database</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
 	</parent>
 
-	<groupId>de.codecentric</groupId>
 	<artifactId>movie-database-commons</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
 	<name>movie-database-commons</name>

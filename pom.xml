@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>de.codecentric</groupId>
+	<artifactId>movie-database</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>1.2.0.RELEASE</version>
+	</parent>
+
+	<name>movie-database</name>
+	<description></description>
+	
+	<modules>
+		<module>movie-database-actors</module>
+		<module>movie-database-commons</module>
+		<module>movie-database-movies</module>
+		<module>movie-database-navigation</module>
+		<module>movie-database-security</module>
+		<module>movie-database-monitoring</module>
+	</modules>
+	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+			    <groupId>de.codecentric</groupId>
+			    <artifactId>spring-boot-starter-admin-client</artifactId>
+			    <version>1.1.1</version>
+			</dependency>
+			<dependency>
+			    <groupId>de.codecentric</groupId>
+			    <artifactId>spring-boot-admin-server</artifactId>
+			    <version>1.1.1</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

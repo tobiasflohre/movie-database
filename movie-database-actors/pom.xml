@@ -3,20 +3,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.codecentric</groupId>
-	<artifactId>movie-database-actors</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<parent>
+		<groupId>de.codecentric</groupId>
+		<artifactId>movie-database</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
 
+	<artifactId>movie-database-actors</artifactId>
+	<packaging>jar</packaging>
 	<name>movie-database-actors</name>
 	<description></description>
-
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.2.0.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
 
 	<dependencies>
 		<dependency>
@@ -28,6 +24,10 @@
 			<groupId>de.codecentric</groupId>
 			<artifactId>movie-database-security</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		<dependency>
+		    <groupId>de.codecentric</groupId>
+		    <artifactId>spring-boot-starter-admin-client</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -55,7 +55,7 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<start-class>de.codecentric.Application</start-class>
+		<start-class>de.codecentric.ActorsApplication</start-class>
 		<java.version>1.7</java.version>
 	</properties>
 
