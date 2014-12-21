@@ -45,7 +45,7 @@ public class ControllerConfiguration {
 
 	@Bean
 	public PartialMovieController partialMovieController(){
-		return new PartialMovieController(serviceConfiguration.movieService(), tagResourceAssembler(), movieResourceAssembler());
+		return new PartialMovieController(serviceConfiguration.movieService(), tagResourceAssembler(), movieResourceAssembler(),serverContextPath);
 	}
 	
 	@Bean

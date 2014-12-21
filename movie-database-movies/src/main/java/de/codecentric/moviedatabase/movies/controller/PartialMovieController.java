@@ -19,10 +19,14 @@ import de.codecentric.moviedatabase.movies.service.MovieService;
 @RequestMapping(value = "/movies", headers={"X-Requested-With=XMLHttpRequest"}, produces="text/html")
 public class PartialMovieController extends AbstractMovieController{
 	
+	String contextPath;
+	
 	public PartialMovieController(MovieService movieService,
 			TagResourceAssembler tagResourceAssembler,
-			MovieResourceAssembler movieResourceAssembler) {
+			MovieResourceAssembler movieResourceAssembler,
+			String contextPath) {
 		super(movieService, tagResourceAssembler, movieResourceAssembler, true);
+		this.contextPath = contextPath;
 	}
 
 	//###################### movies #################################################
@@ -31,7 +35,7 @@ public class PartialMovieController extends AbstractMovieController{
 	public String createMovie(MovieForm movieForm, Model model, HttpServletResponse response) {
 		doCreateMovie(movieForm);
 		if (movieForm.isAddAnotherMovie()){
-			response.setHeader("redirectUrl", linkTo(MoviePathFragment.MOVIES).path(MoviePathFragment.NEW).withRel(MovieRelation.NEW).getHref());
+			response.setHeader("redirectUrl", linkTo(contextPath).path(MoviePathFragment.MOVIES).path(MoviePathFragment.NEW).withRel(MovieRelation.NEW).getHref());
 			return getCreateMovie(model);
 		}
 		
@@ -67,7 +71,7 @@ public class PartialMovieController extends AbstractMovieController{
 	public String removeTagFromMovie(@PathVariable UUID id,
 			@PathVariable Tag tag, Model model, HttpServletResponse response) {
 		doRemoveTagFromMovie(id, tag);
-		response.setHeader("redirectUrl", linkTo(MoviePathFragment.MOVIES).path(MoviePathFragment.TAGS).withRel(MovieRelation.TAGS).getHref());
+		response.setHeader("redirectUrl", linkTo(contextPath).path(MoviePathFragment.MOVIES).path(id).path(MoviePathFragment.TAGS).withRel(MovieRelation.TAGS).getHref());
 		return getTags(id, model);
 	}
 
