@@ -3,7 +3,8 @@ movie-database
 
 ## Description
 
-The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot. This repository has been updated Nov 2014, the old version referenced in [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/) is still available in the branch classic.
+The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot, see [Self-Contained Systems and ROCA: A complete example using Spring Boot, Thymeleaf and Bootstrap](https://blog.codecentric.de/en/2015/01/self-contained-systems-roca-complete-example-using-spring-boot-thymeleaf-bootstrap/) for concepts and pointers to details in the implementation. 
+This repository has been updated Nov 2014, the old version referenced in [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/) is still available in the branch classic.
 
 ## Build & Run
 The movie-database has been updated to use Spring Boot. It also has been split up into three applications, one serving the movies resource, one serving a new actors resource and one serving the navigation header. In addition to that security (SSO) was added, and the infrastructure setup to support this involves Redis and nginx. If you already have those two installed, good, and if not, it's a 15 minute thing (at least on Mac). If you shy away from that you're still able to run a non-integrated movie or actor application, I'll get to that later. The whole setup also includes an instance of [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin), a complete tool for monitoring Spring Boot applications. You can do and see everything you need in there, like health status, log files, thread dumps, environment variables, a JMX console and much more.
