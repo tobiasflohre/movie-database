@@ -1,19 +1,21 @@
 package de.codecentric.moviedatabase.navigation.controller;
 
+import java.util.List;
+
 import de.codecentric.roca.core.ResourceSupport;
 
 public class NavigationResource extends ResourceSupport {
 	
-	private String active;
 	private String searchString;
+	private List<NavElementModel> navElements;
 
-	public NavigationResource(String active, String searchString) {
-		this.active = active;
+	public NavigationResource(String searchString, List<NavElementModel> navElements) {
 		this.searchString = searchString;
+		this.navElements = navElements;
 	}
 
-	public String getActive() {
-		return active;
+	public List<NavElementModel> getNavElements() {
+		return navElements;
 	}
 
 	public String getSearchString() {

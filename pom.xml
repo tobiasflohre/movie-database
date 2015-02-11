@@ -24,6 +24,7 @@
 		<module>movie-database-navigation</module>
 		<module>movie-database-security</module>
 		<module>movie-database-monitoring</module>
+		<module>movie-database-content-delivery</module>
 	</modules>
 	
 	<dependencyManagement>

@@ -26,8 +26,7 @@
 							<a id="home" class="brand" href="../movies.html"
 								th:href="${navResource.getLink('movies').href}">Movie Database</a>
 							<ul class="nav">
-								<li th:class="${navResource.active == 'movies'}? 'active'"><a href="#" th:href="${navResource.getLink('movies').href}">Movies</a></li>
-								<li th:class="${navResource.active == 'actors'}? 'active'"><a href="#" th:href="${navResource.getLink('actors').href}">Actors</a></li>
+								<li th:each="navElement : ${navResource.navElements}" th:class="${navElement.active}? 'active'"><a href="#" th:href="${navElement.url}" th:text="${navElement.label}">Movies</a></li>
 							</ul>
 							<form class="form-search pull-left" action="#"
 								th:action="@{${navResource.getLink('search').href}}" method="get">

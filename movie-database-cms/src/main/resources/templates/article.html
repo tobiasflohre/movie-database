@@ -1,0 +1,11 @@
+<!DOCTYPE html> 
+<html xmlns="http://www.w3.org/1999/xhtml"
+	  xmlns:th="http://www.thymeleaf.org">
+  <head th:replace="head :: headTag"/>
+  <body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div th:include="${contentUrl}"></div>
+	</div>
+  </body>
+</html>
