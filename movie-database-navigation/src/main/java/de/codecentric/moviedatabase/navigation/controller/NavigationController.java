@@ -32,10 +32,10 @@ public class NavigationController{
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String getNavigation(Model model, @RequestParam String searchUrl, @RequestParam String active, @RequestParam(required = false) String searchString) {
-		List<NavigationElement> navigationElements = restTemplate.getForObject(contentDeliveryBaseUrl+"/navigation/navigation.json", NavigationResponse.class).getNavigationElements();
+		List<NavigationElement> navigationElements = restTemplate.getForObject(contentDeliveryBaseUrl+"/content/navigation/navigation.json", NavigationResponse.class).getNavigationElements();
 		List<NavElementModel> navModelList = new ArrayList<>();
 		for (NavigationElement element: navigationElements){
-			navModelList.add(new NavElementModel(element.getLabel(), linkResolver.resolve(element.getType(), element.getUrl(), element.getApplication()), active.equals(element.getApplication())));
+			navModelList.add(new NavElementModel(element.getLabel(), linkResolver.resolve(element.getType(), element.getUrl(), element.getApplication()), active.equals(element.getId())));
 		}
 		NavigationResource navResource = new NavigationResource(searchString != null?searchString:"", navModelList);
 		navResource.add(linkTo(moviesBaseUrl).path(NavPathFragment.MOVIES).withRel(NavRelation.MOVIES));

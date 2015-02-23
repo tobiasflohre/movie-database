@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head th:replace="head :: headTag" />
+<body>
+	<div class="container-fluid">
+		<div th:include="${linkNavigation.href}"></div>
+		<div class="span10 well">
+			<div class="row">
+				<div class="span10" style="padding-top: 20px">
+					<h2>Cinemas</h2>
+					<div>
+						<table class="table table-striped table-hover">
+							<tr th:each="cinema : ${cinemas}">
+								<td class="span6" th:text="${cinema.name}+' '+${cinema.city}">Apollo
+									Hamburg</td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

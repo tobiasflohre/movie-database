@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import de.codecentric.moviedatabase.cms.controller.CinemaController;
 import de.codecentric.moviedatabase.cms.controller.CmsController;
 
 @Configuration 
@@ -18,6 +19,11 @@ public class ControllerConfiguration {
 	@Bean
 	public CmsController cmsController(){
 		return new CmsController(contentDeliveryBaseUrl, navigationBaseUrl);
+	}
+	
+	@Bean
+	public CinemaController cinemaController(){
+		return new CinemaController(contentDeliveryBaseUrl, navigationBaseUrl);
 	}
 
 }

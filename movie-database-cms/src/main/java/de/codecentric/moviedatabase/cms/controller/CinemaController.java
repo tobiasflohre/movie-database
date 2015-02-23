@@ -2,7 +2,8 @@ package de.codecentric.moviedatabase.cms.controller;
 
 import static de.codecentric.roca.core.LinkBuilder.linkTo;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -11,19 +12,21 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
-import org.springframework.web.servlet.HandlerMapping;
 
+import de.codecentric.moviedatabase.cms.domain.Cinema;
+import de.codecentric.moviedatabase.cms.domain.ContentDocument;
+import de.codecentric.moviedatabase.cms.domain.ContentDocumentResponse;
 import de.codecentric.roca.core.Link;
 import de.codecentric.roca.core.LinkBuilder;
 
-@RequestMapping("/cms")
-public class CmsController {
+@RequestMapping("/cinemas")
+public class CinemaController {
 	
 	private String contentDeliveryBaseUrl;
 	private String navigationBaseUrl;
 	private RestTemplate restTemplate;
 	
-	public CmsController(String contentDeliveryBaseUrl, String navigationBaseUrl) {
+	public CinemaController(String contentDeliveryBaseUrl, String navigationBaseUrl) {
 		super();
 		this.contentDeliveryBaseUrl = contentDeliveryBaseUrl;
 		this.navigationBaseUrl = navigationBaseUrl;
@@ -34,19 +37,19 @@ public class CmsController {
 	public Link getLinkNavigation(HttpServletRequest request){
 		// Currently searching is not possible on cms sites
 		LinkBuilder navigationLinkBuilder = linkTo(navigationBaseUrl).path(CmsPathFragment.NAVIGATION).requestParam(CmsRequestParameter.SEARCH_URL, "#")
-				.requestParam(CmsRequestParameter.ACTIVE, "cms");
+				.requestParam(CmsRequestParameter.ACTIVE, "cinemas");
 		return navigationLinkBuilder.withRel(CmsRelation.NAVIGATION);
 	}
 
-	@RequestMapping(value = "/**", method = RequestMethod.GET)
-	public String handleGetRequest(Model model, HttpServletRequest request){
-	    String pathWithinHandlerMapping = (String) request.getAttribute(HandlerMapping.PATH_WITHIN_HANDLER_MAPPING_ATTRIBUTE);
-	    // Remove leading /cms
-	    String path = pathWithinHandlerMapping.substring(4);
-		Map<?,?> cmsDocument = restTemplate.getForObject(contentDeliveryBaseUrl+"/content/"+path+".json", Map.class);
-		// HTML will be fetched by Thymeleafs UrlTemplateResolver at the following contentUrl
-		model.addAttribute("contentUrl", contentDeliveryBaseUrl+"/content/"+path+cmsDocument.get("contentHtml"));
-		return (String) cmsDocument.get("type");
+	@RequestMapping(method = RequestMethod.GET)
+	public String showAllCinemas(Model model){
+		ContentDocumentResponse contentDocuments = restTemplate.getForObject(contentDeliveryBaseUrl+"/search?type=cinema", ContentDocumentResponse.class);
+		List<Cinema> cinemas = new ArrayList<Cinema>();
+		for (ContentDocument contentDocument: contentDocuments.getContent()){
+			cinemas.add(restTemplate.getForObject(contentDeliveryBaseUrl+"/content/"+contentDocument.getUrl(), Cinema.class));
+		}
+		model.addAttribute("cinemas", cinemas);
+		return "/cinemas";
 	}
 
 }
