@@ -18,6 +18,29 @@ Follow [these](https://gist.github.com/netpoetica/5879685) instructions to insta
 Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blob/master/moviedatabase.conf) to /usr/local/etc/nginx/conf.d/. Start nginx with `sudo nginx`, stop it with `sudo nginx -s stop`.
 
 #### Redis
+
+##### Linux 
+
+Redis is available in the repositories of most mainstream distros. Installing it is usually a matter of running something along the lines of (for Ubuntu):
+
+    sudo apt-get install redis
+    
+After the command finishes you can (again on Ubuntu) run:
+
+    redis-cli ping
+    
+Redis should now reply 
+    
+    PONG
+    
+Update application.properties in movie-database-movies and movie-database-actors and set 
+
+    spring.redis.host=127.0.0.1
+    
+
+
+##### Mac and Windows
+
 One fast way to get Redis running is to use a Docker image. If you're on Mac or Windows, you'll need to install [Boot2Docker](http://boot2docker.io/) first and start it. My colleague Ben Ripkens wrote a [nice tool](https://github.com/bripkens/dock) to install standard Docker images fast. To install it, do the following
 
     brew tap bripkens/dock
