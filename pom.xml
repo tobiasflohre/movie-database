@@ -23,6 +23,7 @@
 		<module>movie-database-movies</module>
 		<module>movie-database-navigation</module>
 		<module>movie-database-security</module>
+		<module>movie-database-shop-rest</module>
 		<module>movie-database-monitoring</module>
 	</modules>
 	

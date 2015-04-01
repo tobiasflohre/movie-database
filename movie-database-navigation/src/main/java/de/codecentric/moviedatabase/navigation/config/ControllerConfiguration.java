@@ -15,9 +15,12 @@ public class ControllerConfiguration {
 	@Value("${moviedatabase.actors.url.base}")
 	private String actorsBaseUrl;
 	
+	@Value("${moviedatabase.shop.url.base}")
+	private String shopBaseUrl;
+	
 	@Bean
 	public NavigationController navigationController(){
-		return new NavigationController(moviesBaseUrl,actorsBaseUrl);
+		return new NavigationController(moviesBaseUrl,actorsBaseUrl,shopBaseUrl);
 	}
 
 }

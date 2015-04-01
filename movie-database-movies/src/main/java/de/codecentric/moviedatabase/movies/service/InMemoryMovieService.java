@@ -11,29 +11,37 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
+import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.util.Assert;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import de.codecentric.moviedatabase.movies.domain.Comment;
 import de.codecentric.moviedatabase.movies.domain.Movie;
 import de.codecentric.moviedatabase.movies.domain.Tag;
+import de.codecentric.moviedatabase.movies.events.MovieEvent;
+import de.codecentric.moviedatabase.movies.events.MovieEventType;
 import de.codecentric.moviedatabase.movies.exception.ResourceNotFoundException;
 
 public class InMemoryMovieService implements MovieService {
 	
+	private StringRedisTemplate redisTemplate;
+	private ObjectMapper objectMapper;
+	
 	private Map<UUID, Movie> idToMovieMap = new ConcurrentHashMap<UUID, Movie>();
 	private Map<Tag, Set<Movie>> tagToMoviesMap = new ConcurrentHashMap<Tag, Set<Movie>>();
 	
-	public InMemoryMovieService(){
+	public InMemoryMovieService(StringRedisTemplate redisTemplate, ObjectMapper objectMapper){
+		this.redisTemplate = redisTemplate;
+		this.objectMapper = objectMapper;
 		// let the dummy Movie have always the same ID to test it easily via command line tools / unit tests
 		Movie movie = new Movie(UUID.fromString("240342ea-84c8-415f-b1d5-8e4376191aeb"),
 				"Star Wars","In einer Galaxie weit, weit entfernt",
 				new Date());
 		Tag tag = new Tag("Science Fiction");
 		movie.getTags().add(tag);
-		idToMovieMap.put(movie.getId(), movie);
-		Set<Movie> movies = new HashSet<Movie>();
-		movies.add(movie);
-		tagToMoviesMap.put(tag, movies);
+		createMovie(movie);
 	}
 	
 	@Override
@@ -48,6 +56,16 @@ public class InMemoryMovieService implements MovieService {
 			movies.add(movie);
 			tagToMoviesMap.put(tag, movies);
 		}
+		sendNotification(movie, MovieEventType.MOVIE_CREATED);
+	}
+
+	private void sendNotification(Movie movie, MovieEventType eventType) {
+		try {
+			String object = objectMapper.writeValueAsString(new MovieEvent(eventType,movie));
+			redisTemplate.convertAndSend("movieChannel", object);
+		} catch (JsonProcessingException e) {
+			throw new RuntimeException("Problem with Redis topic.",e);
+		}
 	}
 
 	@Override
@@ -55,6 +73,7 @@ public class InMemoryMovieService implements MovieService {
 		// Tags may not be added or removed by this method
 		Assert.notNull(movie);
 		idToMovieMap.put(movie.getId(), movie);
+		sendNotification(movie, MovieEventType.MOVIE_CHANGED);
 	}
 
 	@Override

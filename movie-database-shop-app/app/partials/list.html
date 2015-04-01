@@ -1,0 +1,33 @@
+<div class="span10 well offset2">
+<table class="table table-striped table-hover"
+       ng-show="ctrl.movies">
+
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>Quantity</th>
+      <th>Price</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="movie in ctrl.movies |
+                                            filter:ctrl.search |
+                                            orderBy:'title':ctrl.sortDescending
+                                            track by movie.id">
+      <td>
+        <a href="{{ '#' + ctrl.baseUrl + '/' + movie.id }}"
+                 class="fa fa-edit">
+                 {{ movie.title }}
+        </a>
+      </td>
+      <td>{{ movie.quantity }}</td>
+      <td>{{ movie.price }}</td>
+    </tr>
+  </tbody>
+
+</table>
+</div>
+<p ng-hide="ctrl.movies">
+  The Movie Database is empty, sorry mate!
+</p>

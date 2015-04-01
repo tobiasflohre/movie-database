@@ -28,11 +28,12 @@
 							<ul class="nav">
 								<li th:class="${navResource.active == 'movies'}? 'active'"><a href="#" th:href="${navResource.getLink('movies').href}">Movies</a></li>
 								<li th:class="${navResource.active == 'actors'}? 'active'"><a href="#" th:href="${navResource.getLink('actors').href}">Actors</a></li>
+								<li th:class="${navResource.active == 'shop'}? 'active'"><a href="#" th:href="${navResource.getLink('shop').href}">Shop</a></li>
 							</ul>
 							<form class="form-search pull-left" action="#"
 								th:action="@{${navResource.getLink('search').href}}" method="get">
 								<div class="input-append">
-									<input type="text" id="searchString" name="searchString"
+									<input type="text" id="searchString" name="searchString" ng-model="ctrl.search"
 										class="search-query input-xxlarge"
 										th:value="${navResource.searchString}" />
 									<button type="submit" class="btn btn-primary">Search</button>

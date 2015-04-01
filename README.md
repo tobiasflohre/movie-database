@@ -1,6 +1,9 @@
 movie-database
 ==============
 
+#### Work in progress
+Currently I'm adding another self-contained system written in AngularJS. The description below currently doesn't reflect that.
+
 ## Description
 
 The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot, see [Self-Contained Systems and ROCA: A complete example using Spring Boot, Thymeleaf and Bootstrap](https://blog.codecentric.de/en/2015/01/self-contained-systems-roca-complete-example-using-spring-boot-thymeleaf-bootstrap/) for concepts and pointers to details in the implementation. 

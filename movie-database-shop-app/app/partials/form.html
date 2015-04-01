@@ -1,0 +1,50 @@
+<form class="form-horizontal"
+      role="form"
+      name="form"
+      ng-submit="form.$valid && ctrl.save()">
+  <div class="col-sm-offset-3 col-sm-9">
+    <h2>{{ctrl.heading}}</h2>
+  </div>
+
+  <div class="form-group">
+    <label for="inputTitle"
+           class="col-sm-3 control-label">
+      Title
+    </label>
+    <div class="col-sm-9">
+      <input type="text"
+             class="form-control"
+             id="inputTitle"
+             name="movieTitle"
+             ng-model="ctrl.movie.title"
+             required>
+      <span class="help-block"
+            ng-show="form.movieTitle.$error.required && form.$dirty">
+        You forgot the movie title!
+      </span>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="inputDescription"
+           class="col-sm-3 control-label">
+      Description
+    </label>
+    <div class="col-sm-9">
+      <textarea rows="3"
+             class="form-control"
+             ng-model="ctrl.movie.description"
+             id="inputDescription"></textarea>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit"
+              class="btn btn-default"
+              ng-disabled="!form.$valid">
+        {{ctrl.buttonLabel}}
+      </button>
+    </div>
+  </div>
+</form>
