@@ -3,32 +3,27 @@
     <h2 class="span4 offset2">{{ ctrl.movie.title }}</h2>
   </div>
   <div class="row">
-    <div class="span2">
-      <span>Description</span>
-    </div>
-    <div class="span8">
-      <p>{{ ctrl.movie.description }}</p>
-    </div>
-  </div>
-</div>
-
-<div class="row">
-  <form class="form-horizontal" role="form" name="form" ng-submit="form.$valid && ctrl.save()">
-    <div class="control-group" style="padding-top:20px">
-      <label class="control-label" for="quantity">Quantity</label>
-      <div class="controls">
-        <input class="input-block-level" name="movieQuantity"
-                   ng-model="ctrl.movie.quantity" id="quantity"/>
+    <form class="form-horizontal" role="form" name="form" ng-submit="form.$valid && ctrl.save()">
+      <div class="control-group">
+        <label class="control-label" for="description">Description</label>
+        <div class="controls">
+          <textarea class="input-block-level" rows="5" id="description" disabled>{{ ctrl.movie.description }}</textarea>
+        </div>
       </div>
-      <label class="control-label" for="price">Price</label>
-      <div class="controls">
-        <input class="input-block-level" name="moviePrice"
-                   ng-model="ctrl.movie.price" id="price"/>
+      <div class="control-group">
+        <label class="control-label" for="quantity">Quantity</label>
+        <div class="controls">
+          <input class="input-block-level" name="movieQuantity"
+                     ng-model="ctrl.movie.quantity" id="quantity"/>
+        </div>
+        <label class="control-label" for="price">Price</label>
+        <div class="controls">
+          <input class="input-block-level" name="moviePrice"
+                     ng-model="ctrl.movie.price" id="price"/>
+        </div>
       </div>
-    </div>
-      <button type="submit" class="btn btn-primary">Save</button>
+      <button type="submit" class="btn btn-primary offset2">Save</button>
       <a href="./movie.html" class="btn">Back to movie list</a>
-    </div>
-    </div>
-  </form>
+    </form>
+  </div>
 </div>
