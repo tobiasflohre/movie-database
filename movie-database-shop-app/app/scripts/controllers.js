@@ -28,9 +28,6 @@
       var ctrl = this;
       ctrl.movie = movie;
 
-      ctrl.heading = 'Edit Movie';
-      ctrl.buttonLabel = 'Save Modifications';
-
       ctrl.save = function() {
         MovieService.edit(ctrl.movie);
         $location.path(BASE_URL);

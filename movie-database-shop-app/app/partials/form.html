@@ -1,50 +1,34 @@
-<form class="form-horizontal"
-      role="form"
-      name="form"
-      ng-submit="form.$valid && ctrl.save()">
-  <div class="col-sm-offset-3 col-sm-9">
-    <h2>{{ctrl.heading}}</h2>
+<div class="span10 offset2">
+  <div class="row">
+    <h2 class="span4 offset2">{{ ctrl.movie.title }}</h2>
   </div>
-
-  <div class="form-group">
-    <label for="inputTitle"
-           class="col-sm-3 control-label">
-      Title
-    </label>
-    <div class="col-sm-9">
-      <input type="text"
-             class="form-control"
-             id="inputTitle"
-             name="movieTitle"
-             ng-model="ctrl.movie.title"
-             required>
-      <span class="help-block"
-            ng-show="form.movieTitle.$error.required && form.$dirty">
-        You forgot the movie title!
-      </span>
+  <div class="row">
+    <div class="span2">
+      <span>Description</span>
+    </div>
+    <div class="span8">
+      <p>{{ ctrl.movie.description }}</p>
     </div>
   </div>
+</div>
 
-  <div class="form-group">
-    <label for="inputDescription"
-           class="col-sm-3 control-label">
-      Description
-    </label>
-    <div class="col-sm-9">
-      <textarea rows="3"
-             class="form-control"
-             ng-model="ctrl.movie.description"
-             id="inputDescription"></textarea>
+<div class="row">
+  <form class="form-horizontal" role="form" name="form" ng-submit="form.$valid && ctrl.save()">
+    <div class="control-group" style="padding-top:20px">
+      <label class="control-label" for="quantity">Quantity</label>
+      <div class="controls">
+        <input class="input-block-level" name="movieQuantity"
+                   ng-model="ctrl.movie.quantity" id="quantity"/>
+      </div>
+      <label class="control-label" for="price">Price</label>
+      <div class="controls">
+        <input class="input-block-level" name="moviePrice"
+                   ng-model="ctrl.movie.price" id="price"/>
+      </div>
     </div>
-  </div>
-
-  <div class="form-group">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit"
-              class="btn btn-default"
-              ng-disabled="!form.$valid">
-        {{ctrl.buttonLabel}}
-      </button>
+      <button type="submit" class="btn btn-primary">Save</button>
+      <a href="./movie.html" class="btn">Back to movie list</a>
     </div>
-  </div>
-</form>
+    </div>
+  </form>
+</div>

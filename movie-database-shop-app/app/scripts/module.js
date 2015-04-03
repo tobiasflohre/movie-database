@@ -8,11 +8,13 @@
   ]);
 
   module.constant('BASE_URL', '/movies');
-  module.constant('STORAGE_ENGINE', 'InMemoryDatabase');
+  module.constant('API_MOVIES_BASE',
+    'http://moviedatabase.com/shop-rest/movies');
 
   module.config(['$routeProvider',
+    '$httpProvider',
     'BASE_URL',
-    function($routeProvider,
+    function($routeProvider, $httpProvider,
       BASE_URL) {
       $routeProvider
         .when(BASE_URL, {
@@ -39,6 +41,13 @@
         .otherwise({
           redirectTo: BASE_URL
         });
+
+      function addDefaultHeader(key, value) {
+        $httpProvider.defaults.headers.common[key] = value;
+      }
+      addDefaultHeader('Accept', 'application/json, application/hal+json');
+      $httpProvider.interceptors.push('HttpInterceptor');
+
     }
   ]);
 
