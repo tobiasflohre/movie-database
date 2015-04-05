@@ -28,7 +28,7 @@ public class ShopRestController {
 	
 	@Autowired
 	public ShopRestController(MovieRepository movieRepository,
-			@Value("moviedatabase.movies.url.base") String movieSystemBase,
+			@Value("${moviedatabase.movies.url.base}") String movieSystemBase,
 			ObjectMapper objectMapper) {
 		super();
 		this.movieRepository = movieRepository;
@@ -43,7 +43,9 @@ public class ShopRestController {
 	
 	@RequestMapping(value="/{id}",method=RequestMethod.GET)
 	public Movie getMovie(@PathVariable UUID id){
-		return movieRepository.findOne(id);
+		Movie movie = movieRepository.findOne(id);
+		movie.setMovieUrl(movieSystemBase+"/movies/"+id);
+		return movie;
 	}
 
 	@RequestMapping(value="/{id}",method=RequestMethod.PUT)

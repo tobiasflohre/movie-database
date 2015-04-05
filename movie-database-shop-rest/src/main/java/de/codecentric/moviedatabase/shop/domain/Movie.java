@@ -5,6 +5,7 @@ import java.util.UUID;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Transient;
 
 @Entity
 public class Movie {
@@ -15,6 +16,8 @@ public class Movie {
 	private String description;
 	private int quantity;
 	private BigDecimal price;
+	@Transient
+	private transient String movieUrl;
 	
 	public UUID getId() {
 		return id;
@@ -45,6 +48,12 @@ public class Movie {
 	}
 	public void setPrice(BigDecimal price) {
 		this.price = price;
+	}
+	public String getMovieUrl() {
+		return movieUrl;
+	}
+	public void setMovieUrl(String movieUrl) {
+		this.movieUrl = movieUrl;
 	}
 	@Override
 	public String toString() {

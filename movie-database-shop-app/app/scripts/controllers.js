@@ -30,6 +30,9 @@
 
       ctrl.save = function() {
         MovieService.edit(ctrl.movie);
+      };
+
+      ctrl.back = function() {
         $location.path(BASE_URL);
       };
 
