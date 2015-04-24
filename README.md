@@ -1,16 +1,14 @@
 movie-database
 ==============
 
-#### Work in progress
-Currently I'm adding another self-contained system written in AngularJS. The description below currently doesn't reflect that.
-
 ## Description
 
 The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot, see [Self-Contained Systems and ROCA: A complete example using Spring Boot, Thymeleaf and Bootstrap](https://blog.codecentric.de/en/2015/01/self-contained-systems-roca-complete-example-using-spring-boot-thymeleaf-bootstrap/) for concepts and pointers to details in the implementation. 
 This repository has been updated Nov 2014, the old version referenced in [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/) is still available in the branch classic.
 
 ## Build & Run
-The movie-database has been updated to use Spring Boot. It also has been split up into three applications, one serving the movies resource, one serving a new actors resource and one serving the navigation header. In addition to that security (SSO) was added, and the infrastructure setup to support this involves Redis and nginx. If you already have those two installed, good, and if not, it's a 15 minute thing (at least on Mac). If you shy away from that you're still able to run a non-integrated movie or actor application, I'll get to that later. The whole setup also includes an instance of [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin), a complete tool for monitoring Spring Boot applications. You can do and see everything you need in there, like health status, log files, thread dumps, environment variables, a JMX console and much more.
+The movie-database is a system of self-contained systems (take a look at the blog posts referenced above). There are three self-contained systems, one for movies, one for actors and one for a shop. The movies and the actors system are ROCA-style applications with server-side rendering, while the shop system is a SPA with AngularJS on the client side and a REST service on the backend side. In addition to these three systems we have two applications serving cross-cutting concerns: one for delivering navigation snippets and one for monitoring.
+An SSO mechanism is used for security, the infrastructure setup to support this involves Redis and nginx. If you already have those two installed, good, and if not, it's a 15 minute thing (at least on Mac). If you shy away from that you're still able to run a non-integrated movie or actor application, I'll get to that later. The whole setup also includes an instance of [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin), a complete tool for monitoring Spring Boot applications. You can do and see everything you need in there, like health status, log files, thread dumps, environment variables, a JMX console and much more.
 
 You need to have [Homebrew](http://brew.sh/) installed to do the following.
 
@@ -55,9 +53,9 @@ Now Redis is running under 192.168.59.103:6379, which is exactly what the movie 
 
 #### Running the applications
 
-Now clone this repository and check out master. From command line you may just call `./buildAndStartup.sh` to build and startup all applications. You need to have `mvn` and `java` on your path for that. If you're not on OSX it should be easy to adapt the script to your OS. I piped the logs to `dev/null` because the applications themselves are logging to `/tmp`.
+Now clone this repository and check out master. From command line you may just call `./buildAndStartup.sh`. This script stops boot2docker, nginx and all movie-database applications and then builds all applications, starts boot2docker and Redis, starts nginx, copies the static Angular app to a specific place and then starts all movie-database applications. You need to have `mvn` and `java` and `boot2docker` and `dock` and `grunt` and `bower` on your path for that (and maybe some other stuff, better take a look at the script). If you're not on OSX it should be easy to adapt the script to your OS. I piped the logs to `dev/null` because the applications themselves are logging to `/tmp`.
 
-Alternatively, in your IDE import all Maven projects, then run the class `NavigationApplication` in the project movie-database-navigation, the class `ActorsApplication` in the project movie-database-actors, the class `MoviesApplication` in the project movie-database-movies and the class `MonitoringApplication`in the project movie-database-monitoring. 
+Alternatively start nginx and Redis yourself, build the Angular app yourself and copy it to the folder accessed by nginx, and then in your IDE import all Maven projects, then run the class `ShopApplication` in the project movie-database-shop-rest, the class `NavigationApplication` in the project movie-database-navigation, the class `ActorsApplication` in the project movie-database-actors, the class `MoviesApplication` in the project movie-database-movies and the class `MonitoringApplication`in the project movie-database-monitoring. 
 
 Then access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://localhost:8083](http://localhost:8083).
 

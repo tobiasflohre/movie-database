@@ -62,7 +62,7 @@
 							  	<input type="checkbox" th:field="*{addAnotherActor}"/>Add another actor
 							  </label>
 							  <button type="submit" class="btn btn-primary">Save</button>
-							  <a href="./actor.html" th:href="${cancelLink.href}" class="btn">Cancel</a>
+							  <a href="./actor.html" th:href="@{${cancelLink.href}}" class="btn">Cancel</a>
 							</div>
 						  </div>
 						</form>
