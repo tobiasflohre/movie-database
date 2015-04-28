@@ -5,6 +5,7 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.Objects;
 
 public class LinkBuilder {
 	
@@ -33,7 +34,7 @@ public class LinkBuilder {
 	}
 
 	public LinkBuilder path(Object path) {
-		href.append("/").append(path != null ? path.toString():"null");
+		href.append("/").append(Objects.toString(path));
 		return this;
 	}
 
