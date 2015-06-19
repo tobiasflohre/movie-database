@@ -10,6 +10,17 @@ This repository has been updated Nov 2014, the old version referenced in [this b
 The movie-database is a system of self-contained systems (take a look at the blog posts referenced above). There are three self-contained systems, one for movies, one for actors and one for a shop. The movies and the actors system are ROCA-style applications with server-side rendering, while the shop system is a SPA with AngularJS on the client side and a REST service on the backend side. In addition to these three systems we have two applications serving cross-cutting concerns: one for delivering navigation snippets and one for monitoring.
 An SSO mechanism is used for security, the infrastructure setup to support this involves Redis and nginx. If you already have those two installed, good, and if not, it's a 15 minute thing (at least on Mac). If you shy away from that you're still able to run a non-integrated movie or actor application, I'll get to that later. The whole setup also includes an instance of [Spring Boot Admin](https://github.com/codecentric/spring-boot-admin), a complete tool for monitoring Spring Boot applications. You can do and see everything you need in there, like health status, log files, thread dumps, environment variables, a JMX console and much more.
 
+### Build & Run with Vagrant
+Clone this repository, jump into the subdirectory movie-database-vagrant and do
+
+    vagrant up
+That will take a while. Edit your /private/etc/hosts file and add the line
+
+    192.168.56.13	moviedatabase.com
+When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.56.13:8083](http://192.168.56.13:8083).
+
+### Build & Run without virtualization
+
 You need to have [Homebrew](http://brew.sh/) installed to do the following.
 
 #### nginx
