@@ -1,11 +1,10 @@
 #!/usr/bin/env bash
 
-MOVIE_DATABASE_HOME=/home/vagrant/share/movie-database
+MOVIE_DATABASE_HOME=/home/vagrant/share
 
 apt-get -y update
 apt-get -y install \
     unzip \
-    git \
     redis-server \
     nginx \
     openjdk-7-jdk \
@@ -15,11 +14,6 @@ apt-get -y install \
 # /usr/bin/node is required by bower
 if [ ! -e /usr/bin/node ]; then
     ln -s /usr/bin/{nodejs,node}
-fi
-
-# clone project form github
-if [ ! -e $MOVIE_DATABASE_HOME ]; then
-    git clone https://github.com/tobiasflohre/movie-database.git $MOVIE_DATABASE_HOME
 fi
 
 cd $MOVIE_DATABASE_HOME
