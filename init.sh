@@ -39,6 +39,7 @@ cd $MOVIE_DATABASE_HOME
 cp $MOVIE_DATABASE_HOME/moviedatabase.conf /etc/nginx/conf.d/
 service nginx restart
 
+pkill -f "java -jar movie-database-"
 java -jar movie-database-monitoring/target/movie-database-monitoring-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
 java -jar movie-database-navigation/target/movie-database-navigation-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
 java -jar movie-database-movies/target/movie-database-movies-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
