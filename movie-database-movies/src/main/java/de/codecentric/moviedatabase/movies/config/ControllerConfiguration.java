@@ -6,6 +6,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import de.codecentric.moviedatabase.movies.actors.ActorsInformationFactory;
 import de.codecentric.moviedatabase.movies.controller.MovieController;
 import de.codecentric.moviedatabase.movies.controller.MovieResourceAssembler;
 import de.codecentric.moviedatabase.movies.controller.PartialMovieController;
@@ -18,9 +19,6 @@ public class ControllerConfiguration {
 	
 	@Value("${moviedatabase.navigation.url.base}")
 	private String navigationBaseUrl;
-	
-	@Value("${moviedatabase.actors.url.base}")
-	private String actorsBaseUrl;
 	
 	@Value("${server.context-path}")
 	private String serverContextPath;
@@ -35,10 +33,15 @@ public class ControllerConfiguration {
 	
 	@Bean
 	public MovieResourceAssembler movieResourceAssembler(){
-		return new MovieResourceAssembler(actorsBaseUrl, serverContextPath);
+		return new MovieResourceAssembler(actorsInformationFactory(), serverContextPath);
 	}
 	
 	@Bean
+	public ActorsInformationFactory actorsInformationFactory() {
+	    return new ActorsInformationFactory();
+    }
+
+    @Bean
 	public MovieController movieController(){
 		return new MovieController(serviceConfiguration.movieService(), tagResourceAssembler(), movieResourceAssembler(), navigationBaseUrl);
 	}
