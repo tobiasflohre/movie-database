@@ -1,0 +1,6 @@
+[submodule "jmdns"]
+	path = jmdns
+	url = https://github.com/yevmel/jmdns.git
+[submodule "jmdns-service-discovery"]
+	path = jmdns-service-discovery
+	url = git@github.com:yevmel/jmdns-service-discovery.git
