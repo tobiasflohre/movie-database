@@ -10,7 +10,7 @@ Vagrant.configure("2") do |config|
     # config.vm.network "forwarded_port", guest: 80, host: 8080
 
     config.vm.network "private_network", ip: "192.168.56.13"
-    config.vm.synced_folder "share", "/home/vagrant/share", create: true
+    config.vm.synced_folder ".", "/home/vagrant/share", create: true
     config.vm.synced_folder "logs", "/opt/moviedatabase/logs", create: true
 
     config.vm.provider "virtualbox" do |vb|
