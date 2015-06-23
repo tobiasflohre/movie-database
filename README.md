@@ -14,10 +14,12 @@ An SSO mechanism is used for security, the infrastructure setup to support this 
 Clone this repository, jump into the subdirectory movie-database-vagrant and do
 
     vagrant up
-That will take a while. Edit your /private/etc/hosts file and add the line
+That will take a while (and it will change some of the application.properties files, don't be confused about that). Edit your /private/etc/hosts file and add the line
 
     192.168.56.13	moviedatabase.com
 When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.56.13:8083](http://192.168.56.13:8083).
+
+This repo that you cloned is shared with the virtual machine. So you can change things in your IDE, log into the virtual machine and rebuild / restart changed services there.
 
 ### Build & Run without virtualization
 
