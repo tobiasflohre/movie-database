@@ -14,21 +14,45 @@ An SSO mechanism is used for security, the infrastructure setup to support this 
 Clone this repository, jump into the subdirectory movie-database-vagrant and do
 
     vagrant up
+    
 That will take a while (and it will change some of the application.properties files, don't be confused about that). Edit your /private/etc/hosts file and add the line
 
     192.168.56.13	moviedatabase.com
+
 When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.56.13:8083](http://192.168.56.13:8083).
 
 This repo that you cloned is shared with the virtual machine. So you can change things in your IDE, log into the virtual machine and rebuild / restart changed services there.
+
+### Build & Run with Docker
+
+For the installation of Docker and Docker Compose please refer to [https://docs.docker.com/installation] and [https://docs.docker.com/compose/install].
+
+Edit your /private/etc/hosts file and add the lines (on the Mac please verify the IP with "boot2docker ip")
+
+    192.168.59.103 moviedatabase.com
+
+Clone this repository and do
+
+    ./build.sh
+    docker-compose up
+
+When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.59.103:8083](http://192.168.59.103:8083).
 
 ### Build & Run without virtualization
 
 You need to have [Homebrew](http://brew.sh/) installed to do the following.
 
 #### nginx
-Follow [these](https://gist.github.com/netpoetica/5879685) instructions to install nginx. When editing the /private/etc/hosts file, add the line
+Follow [these](https://gist.github.com/netpoetica/5879685) instructions to install nginx. When editing the /private/etc/hosts file, add the lines
 
     127.0.0.1 moviedatabase.com
+    127.0.0.1 redis
+    127.0.0.1 monitoring
+    127.0.0.1 navigation
+    127.0.0.1 actors
+    127.0.0.1 movies
+    127.0.0.1 shop
+
 Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blob/master/moviedatabase.conf) to /usr/local/etc/nginx/conf.d/. Start nginx with `sudo nginx`, stop it with `sudo nginx -s stop`.
 
 #### Redis
@@ -47,32 +71,39 @@ Redis should now reply
     
     PONG
     
-Update application.properties in movie-database-movies and movie-database-actors and set 
+##### Mac 
 
-    spring.redis.host=127.0.0.1
-    
+You can install Redis with Homebrew
 
+    brew install redis
 
-##### Mac and Windows
+And start it with
 
-One fast way to get Redis running is to use a Docker image. If you're on Mac or Windows, you'll need to install [Boot2Docker](http://boot2docker.io/) first and start it. My colleague Ben Ripkens wrote a [nice tool](https://github.com/bripkens/dock) to install standard Docker images fast. To install it, do the following
+    redis-server
+
+##### Alternative way for Mac and Windows
+
+Another fast way to get Redis running is to use a Docker image. If you're on Mac or Windows, you'll need to install [Boot2Docker](http://boot2docker.io/) first and start it. My colleague Ben Ripkens wrote a [nice tool](https://github.com/bripkens/dock) to install standard Docker images fast. To install it, do the following
 
     brew tap bripkens/dock
     brew install dock
+
 To install and startup Redis:
 
     dock redis
+
 Now Redis is running under 192.168.59.103:6379, which is exactly what the movie database expects. If you already have a Redis installed somewhere else, take a look at the `application.properties` files contained in the projects, there you may change the host and port used for connecting to Redis (for changing the port you need to add the property `spring.redis.port`, for a list of all Spring Boot properties take a look [here](http://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#common-application-properties)).
 
 #### Running the applications
 
-Now clone this repository and check out master. From command line you may just call `./buildAndStartup.sh`. This script stops boot2docker, nginx and all movie-database applications and then builds all applications, starts boot2docker and Redis, starts nginx, copies the static Angular app to a specific place and then starts all movie-database applications. You need to have `mvn` and `java` and `boot2docker` and `dock` and `grunt` and `bower` on your path for that (and maybe some other stuff, better take a look at the script). If you're not on OSX it should be easy to adapt the script to your OS. I piped the logs to `dev/null` because the applications themselves are logging to `/tmp`.
+Now clone this repository and check out master. From command line you may just call `./build.sh` and then `./startup.sh`. The first script builds all the applactions and the second script stops all services and then starts all applications, starts Redis, starts nginx, copies the static Angular app to a specific place and then starts all movie-database applications. You need to have `mvn` and `java` and `grunt` and `bower` on your path for that (and maybe some other stuff, better take a look at the script). If you're not on OSX it should be easy to adapt the script to your OS. I piped the logs to `dev/null` because the applications themselves are logging to `/tmp`.
 
 Alternatively start nginx and Redis yourself, build the Angular app yourself and copy it to the folder accessed by nginx, and then in your IDE import all Maven projects, then run the class `ShopApplication` in the project movie-database-shop-rest, the class `NavigationApplication` in the project movie-database-navigation, the class `ActorsApplication` in the project movie-database-actors, the class `MoviesApplication` in the project movie-database-movies and the class `MonitoringApplication`in the project movie-database-monitoring. 
 
 Then access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://localhost:8083](http://localhost:8083).
 
 ### Build & Run without security
+
 If you really shy away from installing nginx and Redis, you may just start the applications without security. Remove the dependency to movie-database-security from movie-database-movies and movie-database-actors, then remove the reference to `SecurityConfiguration` from those two projects (making them compile-clean again). Now start `NavigationApplication` and `MoviesApplication` (or `ActorsApplication`) and browse to [http://localhost:8080/movie-app](http://localhost:8080/movie-app) ([http://localhost:8082/actor-app](http://localhost:8082/actor-app)). Navigation links won't work, search works. 
 
 ## Build & Run (classic branch)

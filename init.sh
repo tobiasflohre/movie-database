@@ -19,7 +19,7 @@ fi
 cd $MOVIE_DATABASE_HOME
 
 # fix redis host
-find . -type f -name application.properties -exec sed -i 's/192.168.59.103/127.0.0.1/g' {} \;''
+#find . -type f -name application.properties -exec sed -i 's/192.168.59.103/127.0.0.1/g' {} \;''
 
 mvn clean install
 

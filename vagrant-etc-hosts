@@ -1,0 +1,7 @@
+127.0.0.1 localhost
+127.0.0.1 redis
+127.0.0.1 monitoring
+127.0.0.1 navigation
+127.0.0.1 actors
+127.0.0.1 movies
+127.0.0.1 shop

@@ -17,6 +17,6 @@ Vagrant.configure("2") do |config|
         vb.customize ["modifyvm", :id, "--memory", "4096", "--cpus", "2"]
         vb.name = "movie-database"
     end
-
+    #config.vm.provision :shell, :inline => "sudo ln -fs /home/vagrant/share/vagrant-etc-hosts /etc/hosts"
     config.vm.provision :shell, path: "init.sh"
 end
