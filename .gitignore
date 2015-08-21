@@ -4,3 +4,4 @@
 /logs/
 .vagrant
 dump.rdb
+node_modules

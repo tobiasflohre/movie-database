@@ -1,5 +1,9 @@
 #!/usr/bin/env bash
 
+pkill -f redis-server
+sudo nginx -s stop
+pkill -f movie-database
+
 MOVIE_DATABASE_HOME=/home/vagrant/share
 
 apt-get -y update
@@ -38,9 +42,9 @@ cd $MOVIE_DATABASE_HOME
 
 cp $MOVIE_DATABASE_HOME/moviedatabase.conf /etc/nginx/conf.d/
 service nginx restart
-
-java -jar movie-database-monitoring/target/movie-database-monitoring-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
-java -jar movie-database-navigation/target/movie-database-navigation-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
-java -jar movie-database-movies/target/movie-database-movies-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
-java -jar movie-database-actors/target/movie-database-actors-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
-java -jar movie-database-shop-rest/target/movie-database-shop-rest-0.0.1-SNAPSHOT.jar > /dev/null 2>&1 &
+redis-server 2>&1 &
+java -jar movie-database-monitoring/target/movie-database-monitoring-0.0.1-SNAPSHOT.jar > /tmp/movie-database-monitoring.log 2>&1 &
+java -jar movie-database-navigation/target/movie-database-navigation-0.0.1-SNAPSHOT.jar > /tmp/movie-database-navigation.log 2>&1 &
+java -jar movie-database-movies/target/movie-database-movies-0.0.1-SNAPSHOT.jar > /tmp/movie-database-movies.log 2>&1 &
+java -jar movie-database-actors/target/movie-database-actors-0.0.1-SNAPSHOT.jar > /tmp/movie-database-actors.log 2>&1 &
+java -jar movie-database-shop-rest/target/movie-database-shop-rest-0.0.1-SNAPSHOT.jar > /tmp/movie-database-shop-rest.log 2>&1 &
