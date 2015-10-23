@@ -44,4 +44,9 @@ monitoring:
   build: movie-database-monitoring
   ports:
    - "8083:8083"
+  links:
+  - movies
+  - actors
+  - navigation
+  - shop
 
