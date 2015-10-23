@@ -19,7 +19,7 @@ That will take a while (and it will change some of the application.properties fi
 
     192.168.56.13	moviedatabase.com
 
-When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.56.13:8083](http://192.168.56.13:8083).
+When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://${docker-machine ip default}:8083](http://${docker-machine ip default}:8083).
 
 This repo that you cloned is shared with the virtual machine. So you can change things in your IDE, log into the virtual machine and rebuild / restart changed services there.
 
@@ -27,9 +27,9 @@ This repo that you cloned is shared with the virtual machine. So you can change 
 
 For the installation of Docker and Docker Compose please refer to [https://docs.docker.com/installation] and [https://docs.docker.com/compose/install].
 
-Edit your /private/etc/hosts file and add the lines (on the Mac please verify the IP with "boot2docker ip")
+Edit your /private/etc/hosts file and add the lines (on the Mac please verify the IP with "docker-machine ip default")
 
-    192.168.59.103 moviedatabase.com
+    ${docker-machine ip default} moviedatabase.com
 
 Clone this repository and do
 
