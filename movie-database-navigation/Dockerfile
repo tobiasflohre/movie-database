@@ -1,4 +1,3 @@
-#FROM registry.hub.docker.com/_/java/:oracle-java7
 FROM java:7
 MAINTAINER Dennis Schulte <mail@dennis-schulte.de>
 
