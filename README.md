@@ -29,14 +29,16 @@ For the installation of Docker and Docker Compose please refer to [https://docs.
 
 Edit your /private/etc/hosts file and add the lines (on the Mac please verify the IP with "docker-machine ip default")
 
-    ${docker-machine ip default} moviedatabase.com
+    192.168.99.100 moviedatabase.com
 
 Clone this repository and do
 
     ./build.sh
     docker-compose --x-networking up
 
-Alternatively you can start all the containers manually
+Alternatively you can start all the containers manually and attach them to the network "moviedatabase"
+
+  docker network create moviedatabase
 
   docker build -t monitoring movie-database-monitoring
   docker build -t movies movie-database-movies
@@ -44,9 +46,7 @@ Alternatively you can start all the containers manually
   docker build -t navigation movie-database-navigation
   docker build -t shop movie-database-shop
   docker build -t shopgui movie-database-shop-app
-
-  docker network create moviedatabase
-
+  
   docker run -it --net=moviedatabase --name redis redis
   docker run -p 8083:8083 -it --net=moviedatabase --name moviedatabase_monitoring_1 monitoring
   docker run -p 8080:8080 -it --net=moviedatabase --name moviedatabase_movies_1 movies
@@ -55,7 +55,7 @@ Alternatively you can start all the containers manually
   docker run -p 8084:8084 -it --net=moviedatabase --name moviedatabase_shop_1 shop
   docker run -p 80:80 -it --net=moviedatabase --name moviedatabase_shopgui_1 shopgui
 
-When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.59.103:8083](http://192.168.59.103:8083).
+When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://moviedatabase.com:8083](http://moviedatabase.com:8083).
 
 ### Build & Run without virtualization
 
@@ -66,11 +66,11 @@ Follow [these](https://gist.github.com/netpoetica/5879685) instructions to insta
 
     127.0.0.1 moviedatabase.com
     127.0.0.1 redis
-    127.0.0.1 monitoring
-    127.0.0.1 navigation
-    127.0.0.1 actors
-    127.0.0.1 movies
-    127.0.0.1 shop
+    127.0.0.1 moviedatabase_monitoring_1
+    127.0.0.1 moviedatabase_navigation_1
+    127.0.0.1 moviedatabase_actors_1
+    127.0.0.1 moviedatabase_movies_1
+    127.0.0.1 moviedatabase_shop_1
 
 Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blob/master/moviedatabase.conf) to /usr/local/etc/nginx/conf.d/. Start nginx with `sudo nginx`, stop it with `sudo nginx -s stop`.
 
