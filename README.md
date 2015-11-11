@@ -3,7 +3,7 @@ movie-database
 
 ## Description
 
-The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot, see [Self-Contained Systems and ROCA: A complete example using Spring Boot, Thymeleaf and Bootstrap](https://blog.codecentric.de/en/2015/01/self-contained-systems-roca-complete-example-using-spring-boot-thymeleaf-bootstrap/) for concepts and pointers to details in the implementation. 
+The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot, see [Self-Contained Systems and ROCA: A complete example using Spring Boot, Thymeleaf and Bootstrap](https://blog.codecentric.de/en/2015/01/self-contained-systems-roca-complete-example-using-spring-boot-thymeleaf-bootstrap/) for concepts and pointers to details in the implementation.
 This repository has been updated Nov 2014, the old version referenced in [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/) is still available in the branch classic.
 
 ## Build & Run
@@ -14,7 +14,7 @@ An SSO mechanism is used for security, the infrastructure setup to support this 
 Clone this repository, jump into the subdirectory movie-database-vagrant and do
 
     vagrant up
-    
+
 That will take a while (and it will change some of the application.properties files, don't be confused about that). Edit your /private/etc/hosts file and add the line
 
     192.168.56.13	moviedatabase.com
@@ -34,7 +34,26 @@ Edit your /private/etc/hosts file and add the lines (on the Mac please verify th
 Clone this repository and do
 
     ./build.sh
-    docker-compose up
+    docker-compose --x-networking up
+
+Alternatively you can start all the containers manually
+
+  docker build -t monitoring movie-database-monitoring
+  docker build -t movies movie-database-movies
+  docker build -t actors movie-database-actors
+  docker build -t navigation movie-database-navigation
+  docker build -t shop movie-database-shop
+  docker build -t shopgui movie-database-shop-app
+
+  docker network create moviedatabase
+
+  docker run -it --net=moviedatabase --name redis redis
+  docker run -p 8083:8083 -it --net=moviedatabase --name moviedatabase_monitoring_1 monitoring
+  docker run -p 8080:8080 -it --net=moviedatabase --name moviedatabase_movies_1 movies
+  docker run -p 8083:8083 -it --net=moviedatabase --name moviedatabase_actors_1 actors
+  docker run -p 8081:8081 -it --net=moviedatabase --name moviedatabase_navigation_1 navigation
+  docker run -p 8084:8084 -it --net=moviedatabase --name moviedatabase_shop_1 shop
+  docker run -p 80:80 -it --net=moviedatabase --name moviedatabase_shopgui_1 shopgui
 
 When everything is started, access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://192.168.59.103:8083](http://192.168.59.103:8083).
 
@@ -57,21 +76,21 @@ Now copy [moviedatabase.conf](https://github.com/tobiasflohre/movie-database/blo
 
 #### Redis
 
-##### Linux 
+##### Linux
 
 Redis is available in the repositories of most mainstream distros. Installing it is usually a matter of running something along the lines of (for Ubuntu):
 
     sudo apt-get install redis
-    
+
 After the command finishes you can (again on Ubuntu) run:
 
     redis-cli ping
-    
-Redis should now reply 
-    
+
+Redis should now reply
+
     PONG
-    
-##### Mac 
+
+##### Mac
 
 You can install Redis with Homebrew
 
@@ -98,13 +117,13 @@ Now Redis is running under 192.168.59.103:6379, which is exactly what the movie 
 
 Now clone this repository and check out master. From command line you may just call `./build.sh` and then `./startup.sh`. The first script builds all the applactions and the second script stops all services and then starts all applications, starts Redis, starts nginx, copies the static Angular app to a specific place and then starts all movie-database applications. You need to have `mvn` and `java` and `grunt` and `bower` on your path for that (and maybe some other stuff, better take a look at the script). If you're not on OSX it should be easy to adapt the script to your OS. I piped the logs to `dev/null` because the applications themselves are logging to `/tmp`.
 
-Alternatively start nginx and Redis yourself, build the Angular app yourself and copy it to the folder accessed by nginx, and then in your IDE import all Maven projects, then run the class `ShopApplication` in the project movie-database-shop-rest, the class `NavigationApplication` in the project movie-database-navigation, the class `ActorsApplication` in the project movie-database-actors, the class `MoviesApplication` in the project movie-database-movies and the class `MonitoringApplication`in the project movie-database-monitoring. 
+Alternatively start nginx and Redis yourself, build the Angular app yourself and copy it to the folder accessed by nginx, and then in your IDE import all Maven projects, then run the class `ShopApplication` in the project movie-database-shop-rest, the class `NavigationApplication` in the project movie-database-navigation, the class `ActorsApplication` in the project movie-database-actors, the class `MoviesApplication` in the project movie-database-movies and the class `MonitoringApplication`in the project movie-database-monitoring.
 
 Then access [http://moviedatabase.com](http://moviedatabase.com) in your browser for the application. Currently there are two users, admin/admin and user/user. For monitoring with Spring Boot Admin access [http://localhost:8083](http://localhost:8083).
 
 ### Build & Run without security
 
-If you really shy away from installing nginx and Redis, you may just start the applications without security. Remove the dependency to movie-database-security from movie-database-movies and movie-database-actors, then remove the reference to `SecurityConfiguration` from those two projects (making them compile-clean again). Now start `NavigationApplication` and `MoviesApplication` (or `ActorsApplication`) and browse to [http://localhost:8080/movie-app](http://localhost:8080/movie-app) ([http://localhost:8082/actor-app](http://localhost:8082/actor-app)). Navigation links won't work, search works. 
+If you really shy away from installing nginx and Redis, you may just start the applications without security. Remove the dependency to movie-database-security from movie-database-movies and movie-database-actors, then remove the reference to `SecurityConfiguration` from those two projects (making them compile-clean again). Now start `NavigationApplication` and `MoviesApplication` (or `ActorsApplication`) and browse to [http://localhost:8080/movie-app](http://localhost:8080/movie-app) ([http://localhost:8082/actor-app](http://localhost:8082/actor-app)). Navigation links won't work, search works.
 
 ## Build & Run (classic branch)
 
