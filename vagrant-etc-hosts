@@ -1,0 +1,7 @@
+127.0.0.1 localhost
+127.0.0.1 redis
+127.0.0.1 moviedatabase_monitoring_1
+127.0.0.1 moviedatabase_navigation_1
+127.0.0.1 moviedatabase_actors_1
+127.0.0.1 moviedatabase_movies_1
+127.0.0.1 moviedatabase_shop_1

@@ -1,0 +1,33 @@
+# Security Storage
+redis:
+  image: redis
+monitoring:
+  build: movie-database-monitoring
+  ports:
+   - "8083:8083"
+movies:
+  build: movie-database-movies
+  ports:
+   - "8080:8080"
+actors:
+  build: movie-database-actors
+  ports:
+   - "8082:8082"
+navigation:
+  build: movie-database-navigation
+  ports:
+   - "8081:8081"
+shop:
+  build: movie-database-shop-rest
+  ports:
+   - "8084:8084"
+shopgui:
+  build: movie-database-shop-app
+  ports:
+   - "80:80"
+  #workaround to make sure that the http server starts at last
+  volumes_from:
+   - movies
+   - actors
+   - navigation
+   - shop
