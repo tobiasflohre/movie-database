@@ -4,7 +4,7 @@ movie-database
 ## Description
 
 The movie-database is a ROCA-style web application built on Bootstrap, jQuery, Thymeleaf, Spring MVC and Spring Boot, see [Self-Contained Systems and ROCA: A complete example using Spring Boot, Thymeleaf and Bootstrap](https://blog.codecentric.de/en/2015/01/self-contained-systems-roca-complete-example-using-spring-boot-thymeleaf-bootstrap/) for concepts and pointers to details in the implementation.
-This repository has been updated Nov 2014, the old version referenced in [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/) is still available in the branch classic.
+This repository has been updated Nov 2014, the old version referenced in [this blog post](http://blog.codecentric.de/en/2013/01/a-real-roca-using-bootstrap-jquery-thymeleaf-spring-hateoas-and-spring-mvc/) is still available in the branch [classic](https://github.com/tobiasflohre/movie-database/tree/classic).
 
 ## Build & Run
 The movie-database is a system of self-contained systems (take a look at the blog posts referenced above). There are three self-contained systems, one for movies, one for actors and one for a shop. The movies and the actors system are ROCA-style applications with server-side rendering, while the shop system is a SPA with AngularJS on the client side and a REST service on the backend side. In addition to these three systems we have two applications serving cross-cutting concerns: one for delivering navigation snippets and one for monitoring.
