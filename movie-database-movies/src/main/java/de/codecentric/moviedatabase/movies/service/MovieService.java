@@ -10,22 +10,22 @@ import de.codecentric.moviedatabase.movies.domain.Tag;
 
 public interface MovieService {
 	
-	public void createMovie(Movie movie);
+	void createMovie(Movie movie);
 	
-	public void updateMovie(Movie movie);
+	void updateMovie(Movie movie);
 	
-	public void deleteMovie(UUID id);
+	void deleteMovie(UUID id);
 	
-	public void addCommentToMovie(Comment comment, UUID movieId);
+	void addCommentToMovie(Comment comment, UUID movieId);
 	
-	public void addTagToMovie(Tag tag, UUID movieId);
+	void addTagToMovie(Tag tag, UUID movieId);
 	
-	public void removeTagFromMovie(Tag tag, UUID movieId);
+	void removeTagFromMovie(Tag tag, UUID movieId);
 
-	public Movie findMovieById(UUID id);
+	Movie findMovieById(UUID id);
 	
-	public List<Movie> findMovieByTagsAndSearchString(Set<Tag> tags, Set<String> searchWords);
+	List<Movie> findMovieByTagsAndSearchString(Set<Tag> tags, Set<String> searchWords);
 
-	public List<Tag> findAllTags();
+	List<Tag> findAllTags();
 	
 }
