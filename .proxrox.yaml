@@ -1,0 +1,7 @@
+serverName: 'moviedatabase.com'
+root: false
+port: 80
+proxy:
+  '/': 'http://localhost:8080/movie-app/'
+  '/movie-app/': 'http://localhost:8080/movie-app/'
+  '/actor-app/': 'http://localhost:8082/actor-app/'
